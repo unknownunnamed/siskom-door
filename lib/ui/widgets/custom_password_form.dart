@@ -26,7 +26,7 @@ class _CustomPasswordFormState extends State<CustomPasswordForm> {
         controller: widget.controller,
         obscureText: !isShow,
         style: TextStyle(
-            color: CustomColor.secondaryGold,
+            color: CustomColor.neutralBlack,
             fontSize: 16,
             fontWeight: FontWeight.w400),
         decoration: InputDecoration(

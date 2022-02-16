@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         style: TextStyle(
-            color: CustomColor.secondaryGold,
+            color: CustomColor.neutralBlack,
             fontSize: 16,
             fontWeight: FontWeight.w400),
         decoration: InputDecoration(
