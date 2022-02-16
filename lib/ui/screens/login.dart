@@ -99,26 +99,24 @@ class _LoginState extends State<Login> {
                                 BorderRadius.all(Radius.circular(100))),
                         child: DropdownButton<String>(
                           isExpanded: true,
-                          hint: SizedBox(
-                            child: Text(
-                              "Status Akun",
-                              style: TextStyle(
-                                  color: CustomColor.neutralBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
-                            ),
+                          hint: Text(
+                            "Status Akun",
+                            style: TextStyle(
+                                color: CustomColor.neutralBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
                           ),
+                          underline: SizedBox(),
                           value: dropdownValue,
-                          // icon: Icon(
-                          //   Icons.arrow_downward,
-                          //   color: CustomColor.neutralLightGray,
-                          // ),
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: CustomColor.neutralBlack,
+                          ),
                           elevation: 16,
                           style: TextStyle(
                               color: CustomColor.neutralBlack,
                               fontSize: 16,
                               fontWeight: FontWeight.w400),
-                          underline: null,
                           onChanged: (String? newValue) {
                             setState(() {
                               dropdownValue = newValue!;
