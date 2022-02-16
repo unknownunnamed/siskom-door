@@ -7,4 +7,6 @@ class CustomColor {
   static final Color secondaryGold = Color(0xffFFD600);
   static final Color neutralBlack = Color(0xff292929);
   static final Color neutralWhite = Color(0xffFAFAFA);
+  static final Color neutralGray = Color(0xff808080);
+  static final Color neutralLightGray = Color(0xffF2F2F2);
 }
