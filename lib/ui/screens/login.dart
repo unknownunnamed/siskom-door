@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/ui/screens/home.dart';
 import 'package:sisdoor/ui/widgets/custom_password_form.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
 
@@ -131,23 +132,31 @@ class _LoginState extends State<Login> {
                           }).toList(),
                         ),
                       ),
-                      Container(
-                          // margin: EdgeInsets.only(top: 20),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 15),
-                          decoration: BoxDecoration(
-                              color: CustomColor.secondaryGreen,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100))),
-                          child: Text(
-                            "Login",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: CustomColor.neutralWhite,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ))
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()),
+                              (route) => false);
+                        },
+                        child: Container(
+                            // margin: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            decoration: BoxDecoration(
+                                color: CustomColor.secondaryGreen,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100))),
+                            child: Text(
+                              "Login",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: CustomColor.neutralWhite,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )),
+                      )
                     ],
                   ),
                 )
