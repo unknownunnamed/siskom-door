@@ -11,7 +11,7 @@ class CustomMonitoringCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 10, left: 30, right: 30),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: CustomColor.neutralWhite,

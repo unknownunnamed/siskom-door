@@ -12,7 +12,7 @@ class Monitoring extends StatelessWidget {
         backgroundColor: CustomColor.neutralWhite,
         appBar: customAppbar(context, "Monitoring Pengguna"),
         body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            // padding: EdgeInsets.symmetric(horizontal: 30),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: ListView(
