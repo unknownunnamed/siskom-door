@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/ui/screens/login.dart';
+import 'package:sisdoor/ui/screens/monitoring.dart';
+import 'package:sisdoor/ui/screens/pengguna.dart';
 import 'package:sisdoor/ui/screens/schedule.dart';
 
 class Home extends StatelessWidget {
@@ -17,8 +19,16 @@ class Home extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => Schedule()));
         }
       ],
-      [Icons.room_preferences, "Monitoring dan Kendali Pintu", () {}],
-      [Icons.data_usage, "Data Pengguna", () {}],
+      [
+        Icons.room_preferences,
+        "Monitoring dan Kendali Pintu",
+        () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Monitoring()));
+        }
+      ],
+      [Icons.data_usage, "Data Pengguna", () {Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Pengguna())); }],
       [
         Icons.logout,
         "Logout",

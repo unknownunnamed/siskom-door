@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 
 class Schedule extends StatefulWidget {
   const Schedule({Key? key}) : super(key: key);
@@ -10,11 +11,11 @@ class Schedule extends StatefulWidget {
 
 class _ScheduleState extends State<Schedule> {
   List<String> hour = [
-    for (var i = 1; i <= 24; i += 1) i < 10 ? '0$i' : i.toString()
+    for (var i = 0; i <= 23; i += 1) i < 10 ? '0$i' : i.toString()
   ];
 
   List<String> minutes = [
-    for (var i = 1; i < 60; i += 1) i < 10 ? '0$i' : i.toString()
+    for (var i = 0; i < 60; i += 1) i < 10 ? '0$i' : i.toString()
   ];
 
   List<String> listRuangan = ["Lab A", "Lab B", "Lab Workshop"];
@@ -25,24 +26,7 @@ class _ScheduleState extends State<Schedule> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColor.neutralWhite,
-      appBar: AppBar(
-        backgroundColor: CustomColor.neutralWhite,
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back_ios_new,
-            size: 25,
-            color: CustomColor.neutralBlack,
-          ),
-        ),
-        title: Text(
-          "Atur Jadwal Operasional",
-          style: TextStyle(color: CustomColor.neutralBlack),
-        ),
-      ),
+      appBar: customAppbar(context, "Atur Jadwal Operasional"),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
         width: MediaQuery.of(context).size.width,
