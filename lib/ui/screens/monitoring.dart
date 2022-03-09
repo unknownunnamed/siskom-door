@@ -11,7 +11,7 @@ class Monitoring extends StatelessWidget {
     return Scaffold(
         backgroundColor: CustomColor.neutralWhite,
         appBar: customAppbar(context, "Monitoring Pengguna"),
-        body: Container(
+        body: SizedBox(
             // padding: EdgeInsets.symmetric(horizontal: 30),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,

@@ -27,8 +27,14 @@ class Home extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => Monitoring()));
         }
       ],
-      [Icons.data_usage, "Data Pengguna", () {Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Pengguna())); }],
+      [
+        Icons.data_usage,
+        "Data Pengguna",
+        () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Pengguna()));
+        }
+      ],
       [
         Icons.logout,
         "Logout",

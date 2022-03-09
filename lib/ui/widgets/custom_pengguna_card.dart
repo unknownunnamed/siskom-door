@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/ui/screens/edit_pengguna.dart';
 
 class CustomPenggunaCard extends StatelessWidget {
   final String nama, email;
@@ -57,16 +58,23 @@ class CustomPenggunaCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                    color: CustomColor.secondaryTorea, shape: BoxShape.circle),
-                child: Center(
-                  child: Icon(
-                    Icons.edit,
-                    size: 15,
-                    color: CustomColor.neutralWhite,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditPengguna()));
+                },
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: CustomColor.secondaryTorea,
+                      shape: BoxShape.circle),
+                  child: Center(
+                    child: Icon(
+                      Icons.edit,
+                      size: 15,
+                      color: CustomColor.neutralWhite,
+                    ),
                   ),
                 ),
               ),
