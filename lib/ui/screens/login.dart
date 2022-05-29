@@ -137,23 +137,31 @@ class _LoginState extends State<Login> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          AuthFirebase.signIn(
-                                  emailController.text,
-                                  passwordController.text,
-                                  dropdownValue == 'admin' ? "1" : "0")
-                              .then((value) => Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          dropdownValue == 'admin'
-                                              ? HomeAdmin()
-                                              : HomeUser()),
-                                  (route) => false))
-                              .catchError((err) => showDialog(
+                          if (dropdownValue != null) {
+                            AuthFirebase.signIn(
+                                    emailController.text,
+                                    passwordController.text,
+                                    dropdownValue == 'admin' ? "1" : "0")
+                                .then((value) => Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            dropdownValue == 'admin'
+                                                ? HomeAdmin()
+                                                : HomeUser()),
+                                    (route) => false))
+                                .catchError((err) => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        customErrorModal(
+                                            context, "Terjadi kesalahan")));
+                          } else {
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) =>
-                                    customErrorModal(context,
-                                        "Terjadi kesalahan")));
+                                    customErrorModal(
+                                        context, "Terjadi kesalahan"));
+                          }
                         },
                         child: Container(
                             // margin: EdgeInsets.only(top: 20),
