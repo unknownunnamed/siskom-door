@@ -1,5 +1,7 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 
 class Schedule extends StatefulWidget {
@@ -10,6 +12,9 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
+  bool isProsesClose = false;
+  bool isProsesOpen = false;
+
   List<String> hour = [
     for (var i = 0; i <= 23; i += 1) i < 10 ? '0$i' : i.toString()
   ];
@@ -18,9 +23,24 @@ class _ScheduleState extends State<Schedule> {
     for (var i = 0; i < 60; i += 1) i < 10 ? '0$i' : i.toString()
   ];
 
-  List<String> listRuangan = ["Lab A", "Lab B", "Lab Workshop"];
-
   String? ruangan, jamOpen, menitOpen, jamClose, menitClose;
+
+  List<String> dataPintu = [];
+
+  void initData() async {
+    PintuServices.ref.onValue.listen((event) {
+      setState(() {
+        dataPintu =
+            event.snapshot.children.map((e) => e.key.toString()).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +87,7 @@ class _ScheduleState extends State<Schedule> {
                     ruangan = newValue!;
                   });
                 },
-                items:
-                    listRuangan.map<DropdownMenuItem<String>>((String value) {
+                items: dataPintu.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -195,35 +214,55 @@ class _ScheduleState extends State<Schedule> {
                       ),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        color: (ruangan != null &&
-                                jamOpen != null &&
-                                menitOpen != null)
-                            ? CustomColor.secondaryGreen
-                            : CustomColor.neutralWhite,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: CustomColor.neutralGray.withOpacity(0.15),
-                            spreadRadius: 0,
-                            blurRadius: 10,
-                            offset: Offset(0, 0),
-                          ),
-                        ]),
-                    child: Text(
-                      "Simpan",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      if (!isProsesOpen) {
+                        setState(() {
+                          isProsesOpen = true;
+                        });
+                        PintuServices.changeOperasionalOpen(
+                                ruangan!, jamOpen!, menitOpen!)
+                            .then((value) => setState(() {
+                                  isProsesOpen = false;
+                                }))
+                            .catchError((err) {
+                          print(err);
+                          setState(() {
+                            isProsesOpen = false;
+                          });
+                        });
+                      }
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
                           color: (ruangan != null &&
                                   jamOpen != null &&
-                                  menitOpen != null)
-                              ? CustomColor.neutralWhite
-                              : CustomColor.neutralGray,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                                  menitOpen != null && !isProsesOpen)
+                              ? CustomColor.secondaryGreen
+                              : CustomColor.neutralWhite,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: CustomColor.neutralGray.withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 10,
+                              offset: Offset(0, 0),
+                            ),
+                          ]),
+                      child: Text(
+                        !isProsesOpen ? "Simpan" : "Proses",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: (ruangan != null &&
+                                    jamOpen != null &&
+                                    menitOpen != null)
+                                ? CustomColor.neutralWhite
+                                : CustomColor.neutralGray,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   )
                 ],
@@ -348,35 +387,56 @@ class _ScheduleState extends State<Schedule> {
                       ),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        color: (ruangan != null &&
-                                jamClose != null &&
-                                menitClose != null)
-                            ? CustomColor.secondaryGreen
-                            : CustomColor.neutralWhite,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: CustomColor.neutralGray.withOpacity(0.15),
-                            spreadRadius: 0,
-                            blurRadius: 10,
-                            offset: Offset(0, 0),
-                          ),
-                        ]),
-                    child: Text(
-                      "Simpan",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      if (!isProsesClose) {
+                        setState(() {
+                          isProsesClose = true;
+                        });
+                        PintuServices.changeOperasionalClose(
+                                ruangan!, jamClose!, menitClose!)
+                            .then((value) => setState(() {
+                                  isProsesClose = false;
+                                }))
+                            .catchError((err) {
+                          print(err);
+                          setState(() {
+                            isProsesClose = false;
+                          });
+                        });
+                      }
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
                           color: (ruangan != null &&
                                   jamClose != null &&
-                                  menitClose != null)
-                              ? CustomColor.neutralWhite
-                              : CustomColor.neutralGray,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                                  menitClose != null &&
+                                  !isProsesClose)
+                              ? CustomColor.secondaryGreen
+                              : CustomColor.neutralWhite,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: CustomColor.neutralGray.withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 10,
+                              offset: Offset(0, 0),
+                            ),
+                          ]),
+                      child: Text(
+                        !isProsesClose ? "Simpan" : "Proses",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: (ruangan != null &&
+                                    jamClose != null &&
+                                    menitClose != null)
+                                ? CustomColor.neutralWhite
+                                : CustomColor.neutralGray,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   )
                 ],

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/firebase_auth.dart';
+import 'package:sisdoor/ui/screens/kendali_pintu.dart';
 import 'package:sisdoor/ui/screens/login.dart';
-import 'package:sisdoor/ui/screens/monitoring.dart';
+import 'package:sisdoor/ui/screens/aktivitas_pengguna.dart';
 import 'package:sisdoor/ui/screens/pengguna.dart';
 import 'package:sisdoor/ui/screens/schedule.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeAdmin extends StatelessWidget {
+  const HomeAdmin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,18 @@ class Home extends StatelessWidget {
       ],
       [
         Icons.room_preferences,
-        "Monitoring dan Kendali Pintu",
+        "Kendali Pintu",
         () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Monitoring()));
+              context, MaterialPageRoute(builder: (context) => KendaliPintu()));
+        }
+      ],
+      [
+        Icons.meeting_room,
+        "Aktivitas Pengguna",
+        () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AktivitasPengguna()));
         }
       ],
       [
@@ -38,7 +48,8 @@ class Home extends StatelessWidget {
       [
         Icons.logout,
         "Logout",
-        () {
+        () async {
+          await AuthFirebase.signOut();
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => Login()),

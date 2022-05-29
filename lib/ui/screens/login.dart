@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
-import 'package:sisdoor/ui/screens/home.dart';
+import 'package:sisdoor/services/firebase_auth.dart';
+import 'package:sisdoor/ui/screens/home_admin.dart';
+import 'package:sisdoor/ui/screens/home_user.dart';
+import 'package:sisdoor/ui/widgets/custom_error_modal.dart';
 import 'package:sisdoor/ui/widgets/custom_password_form.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
 
@@ -134,10 +137,23 @@ class _LoginState extends State<Login> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => Home()),
-                              (route) => false);
+                          AuthFirebase.signIn(
+                                  emailController.text,
+                                  passwordController.text,
+                                  dropdownValue == 'admin' ? "1" : "0")
+                              .then((value) => Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          dropdownValue == 'admin'
+                                              ? HomeAdmin()
+                                              : HomeUser()),
+                                  (route) => false))
+                              .catchError((err) => showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    customErrorModal(context,
+                                        "Terjadi kesalahan")));
                         },
                         child: Container(
                             // margin: EdgeInsets.only(top: 20),

@@ -1,23 +1,55 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/rfid_services.dart';
+import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
-import 'package:sisdoor/ui/widgets/custom_password_form.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
 
 class EditPengguna extends StatefulWidget {
-  const EditPengguna({Key? key}) : super(key: key);
+  final DataSnapshot dataUser;
+  const EditPengguna({Key? key, required this.dataUser}) : super(key: key);
 
   @override
   State<EditPengguna> createState() => _EditPenggunaState();
 }
 
 class _EditPenggunaState extends State<EditPengguna> {
-  TextEditingController namaController =
-      TextEditingController(text: "Tengku Nopriyanti Murti");
-  TextEditingController noHPController = TextEditingController(text: "08");
-  TextEditingController emailController =
-      TextEditingController(text: "Tengkunopri@gmail.com");
-  TextEditingController passwordController = TextEditingController(text: "123");
+  TextEditingController namaController = TextEditingController();
+  TextEditingController noHPController = TextEditingController();
+
+  String? rfid;
+  String? rfidOld;
+  String? dropdownValue;
+  List<String> mapRFID = [];
+
+  void initData() async {
+    namaController = TextEditingController(
+        text: widget.dataUser.child('nama').value.toString());
+    noHPController = TextEditingController(
+        text: widget.dataUser.child('noHP').value.toString());
+    rfid = widget.dataUser.child('idkartu').value.toString();
+    RFIDServices.ref.orderByChild('status').equalTo(0).onValue.listen((event) {
+      setState(() {
+        mapRFID = event.snapshot.children.map((e) => e.key.toString()).toList();
+      });
+    });
+    RFIDServices.ref
+        .orderByChild('ID')
+        .equalTo(widget.dataUser.child('idkartu').value.toString())
+        .onValue
+        .listen((event) {
+      setState(() {
+        rfidOld = event.snapshot.children.toList()[0].key.toString();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +86,72 @@ class _EditPenggunaState extends State<EditPengguna> {
                     controller: noHPController,
                     inputType: TextInputType.number,
                     label: "Nomor HP"),
-                CustomTextField(
-                  controller: emailController,
-                  label: "Email",
-                  inputType: TextInputType.emailAddress,
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(left: 20, right: 30),
+                  decoration: BoxDecoration(
+                      color: CustomColor.neutralLightGray,
+                      borderRadius: BorderRadius.all(Radius.circular(100))),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    hint: Text(
+                      rfidOld ?? '',
+                      style: TextStyle(
+                          color: CustomColor.neutralBlack,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    underline: SizedBox(),
+                    value: dropdownValue,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: CustomColor.neutralBlack,
+                    ),
+                    elevation: 16,
+                    style: TextStyle(
+                        color: CustomColor.neutralBlack,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                      RFIDServices.ref
+                          .orderByKey()
+                          .equalTo(newValue)
+                          .onValue
+                          .listen((event) {
+                        setState(() {
+                          rfid = event.snapshot.children
+                              .toList()[0]
+                              .child('ID')
+                              .value
+                              .toString();
+                        });
+                      });
+                    },
+                    items:
+                        mapRFID.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                CustomPasswordForm(
-                    controller: passwordController, label: "Password"),
                 SizedBox(
                   height: 15,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    await UserServices.updateUser(
+                        widget.dataUser.child('idkartu').value.toString(),
+                        rfid!,
+                        noHPController.text,
+                        namaController.text,
+                        widget.dataUser.key.toString());
+                    Navigator.pop(context);
+                  },
                   child: Container(
                       // margin: EdgeInsets.only(top: 20),
                       padding:

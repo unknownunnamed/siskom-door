@@ -1,11 +1,34 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/screens/tambah_pengguna.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 import 'package:sisdoor/ui/widgets/custom_pengguna_card.dart';
 
-class Pengguna extends StatelessWidget {
+class Pengguna extends StatefulWidget {
   const Pengguna({Key? key}) : super(key: key);
+
+  @override
+  State<Pengguna> createState() => _PenggunaState();
+}
+
+class _PenggunaState extends State<Pengguna> {
+  Iterable<DataSnapshot> dataUser = [];
+
+  void initData() async {
+    UserServices.ref.orderByChild('status').equalTo(0).onValue.listen((event) {
+      setState(() {
+        dataUser = event.snapshot.children;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +43,9 @@ class Pengguna extends StatelessWidget {
               children: [
                 ListView(
                   padding: EdgeInsets.only(top: 10, bottom: 70),
-                  children: [1, 1, 1, 1, 1, 11, 1, 1, 1, 11, 1, 1, 1]
+                  children: dataUser
                       .map((e) => CustomPenggunaCard(
-                          nama: "Tengku Nopriyanti Murti",
-                          email: "Tengkunopri@gmail.com"))
+                          dataUser: e,))
                       .toList(),
                 ),
                 Positioned(

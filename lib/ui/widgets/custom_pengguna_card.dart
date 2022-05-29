@@ -1,10 +1,12 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/screens/edit_pengguna.dart';
 
 class CustomPenggunaCard extends StatelessWidget {
-  final String nama, email;
-  const CustomPenggunaCard({Key? key, required this.nama, required this.email})
+  final DataSnapshot dataUser;
+  const CustomPenggunaCard({Key? key, required this.dataUser})
       : super(key: key);
 
   @override
@@ -34,7 +36,7 @@ class CustomPenggunaCard extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width / 2,
-                child: Text(nama,
+                child: Text(dataUser.child('nama').value.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: CustomColor.neutralBlack,
@@ -46,7 +48,7 @@ class CustomPenggunaCard extends StatelessWidget {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width / 2,
-                child: Text(email,
+                child: Text(dataUser.child('email').value.toString(),
                     style: TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: CustomColor.neutralGray,
@@ -60,8 +62,12 @@ class CustomPenggunaCard extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditPengguna()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditPengguna(
+                                dataUser: dataUser,
+                              )));
                 },
                 child: Container(
                   width: 30,
@@ -81,16 +87,25 @@ class CustomPenggunaCard extends StatelessWidget {
               SizedBox(
                 width: 5,
               ),
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                    color: CustomColor.primaryRose, shape: BoxShape.circle),
-                child: Center(
-                  child: Icon(
-                    Icons.delete,
-                    size: 15,
-                    color: CustomColor.neutralWhite,
+              GestureDetector(
+                onTap: () async {
+                  UserServices.deleteUser(
+                      dataUser.key.toString(),
+                      dataUser.child('email').value.toString(),
+                      dataUser.child('password').value.toString(),
+                      dataUser.child('idkartu').value.toString());
+                },
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: CustomColor.primaryRose, shape: BoxShape.circle),
+                  child: Center(
+                    child: Icon(
+                      Icons.delete,
+                      size: 15,
+                      color: CustomColor.neutralWhite,
+                    ),
                   ),
                 ),
               )

@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "453099496947",
+    "firebase_url": "https://pintu-skripsi-default-rtdb.firebaseio.com",
+    "project_id": "pintu-skripsi",
+    "storage_bucket": "pintu-skripsi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453099496947:android:4c5cda34718f7cd7415e86",
+        "android_client_info": {
+          "package_name": "com.example.KendaliPintu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr2vdUGQsCKklaIPa3ebi6yRgwpp8cLoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453099496947:android:15aa3a327d0ef480415e86",
+        "android_client_info": {
+          "package_name": "com.example.pintuotomatis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr2vdUGQsCKklaIPa3ebi6yRgwpp8cLoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453099496947:android:99b806748620a055415e86",
+        "android_client_info": {
+          "package_name": "com.example.sisdoor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr2vdUGQsCKklaIPa3ebi6yRgwpp8cLoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453099496947-i21u6itfcd1ihosafnnn2spdvo3glq2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
