@@ -43,7 +43,11 @@ class _AktivitasPenggunaState extends State<AktivitasPengguna> {
               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               children: data
                   .map((e) => CustomAktivitasCard(
-                        datetime: DateFormat('d MMM yyyy \nH:mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(e.child("timestamp").value.toString()) * 1000)),
+                        datetime: DateFormat('d MMM yyyy \nHH:mm').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(
+                                        e.child("timestamp").value.toString()) *
+                                    1000)
+                                .subtract(Duration(hours: 7))),
                         idkartu: e.child('nomor_kartu').value.toString(),
                         ruangan: e.child('ruangan').value.toString(),
                         isLock: e.child('status_kunci').value.toString() == "1"

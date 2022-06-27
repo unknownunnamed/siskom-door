@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/services/rfid_services.dart';
@@ -49,7 +47,7 @@ class UserServices {
       String uid, String email, String password, String id) async {
     List<String> result = await AuthFirebase.getEmailPassword();
     await AuthFirebase.removeUser(email, password);
-    await AuthFirebase.signIn(result[0], result[1], '1');
+    await AuthFirebase.signIn(result[0], result[1]);
     await ref.child(uid).remove();
     await RFIDServices.changeStatus(id, 0);
   }

@@ -7,8 +7,8 @@ class PintuServices {
       String pintu, String jamOpen, String menitOpen) async {
     try {
       await ref.child(pintu).update({
-        'pagiJam': jamOpen,
-        'pagiMenit': menitOpen,
+        'pagiJam': int.parse(jamOpen),
+        'pagiMenit': int.parse(menitOpen),
       });
     } catch (e) {
       throw e.toString();
@@ -18,9 +18,8 @@ class PintuServices {
   static Future<void> changeOperasionalClose(
       String pintu, String jamClose, String menitClose) async {
     try {
-      await ref
-          .child(pintu)
-          .update({'soreJam': jamClose, 'soreMenit': menitClose});
+      await ref.child(pintu).update(
+          {'soreJam': int.parse(jamClose), 'soreMenit': int.parse(menitClose)});
     } catch (e) {
       throw e.toString();
     }

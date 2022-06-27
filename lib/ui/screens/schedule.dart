@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
@@ -226,7 +225,6 @@ class _ScheduleState extends State<Schedule> {
                                   isProsesOpen = false;
                                 }))
                             .catchError((err) {
-                          print(err);
                           setState(() {
                             isProsesOpen = false;
                           });
@@ -399,7 +397,6 @@ class _ScheduleState extends State<Schedule> {
                                   isProsesClose = false;
                                 }))
                             .catchError((err) {
-                          print(err);
                           setState(() {
                             isProsesClose = false;
                           });

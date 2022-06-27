@@ -142,8 +142,7 @@ class _TambahPenggunaState extends State<TambahPengguna> {
                             rfid!,
                             noHPController.text,
                             namaController.text)
-                        .then((value) => Navigator.pop(context))
-                        .catchError((err) => print(err));
+                        .then((value) => Navigator.pop(context));
                   },
                   child: Container(
                       // margin: EdgeInsets.only(top: 20),

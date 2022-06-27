@@ -94,59 +94,57 @@ class _LoginState extends State<Login> {
                       ),
                       CustomPasswordForm(
                           controller: passwordController, label: "Password"),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 20),
-                        padding: EdgeInsets.only(left: 20, right: 30),
-                        decoration: BoxDecoration(
-                            color: CustomColor.neutralLightGray,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100))),
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          hint: Text(
-                            "Status Akun",
-                            style: TextStyle(
-                                color: CustomColor.neutralBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          underline: SizedBox(),
-                          value: dropdownValue,
-                          icon: Icon(
-                            Icons.arrow_drop_down,
-                            color: CustomColor.neutralBlack,
-                          ),
-                          elevation: 16,
-                          style: TextStyle(
-                              color: CustomColor.neutralBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownValue = newValue!;
-                            });
-                          },
-                          items: mapAccount
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ),
+                      // Container(
+                      //   margin: EdgeInsets.only(bottom: 20),
+                      //   padding: EdgeInsets.only(left: 20, right: 30),
+                      //   decoration: BoxDecoration(
+                      //       color: CustomColor.neutralLightGray,
+                      //       borderRadius:
+                      //           BorderRadius.all(Radius.circular(100))),
+                      //   child: DropdownButton<String>(
+                      //     isExpanded: true,
+                      //     hint: Text(
+                      //       "Status Akun",
+                      //       style: TextStyle(
+                      //           color: CustomColor.neutralBlack,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w400),
+                      //     ),
+                      //     underline: SizedBox(),
+                      //     value: dropdownValue,
+                      //     icon: Icon(
+                      //       Icons.arrow_drop_down,
+                      //       color: CustomColor.neutralBlack,
+                      //     ),
+                      //     elevation: 16,
+                      //     style: TextStyle(
+                      //         color: CustomColor.neutralBlack,
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.w400),
+                      //     onChanged: (String? newValue) {
+                      //       setState(() {
+                      //         dropdownValue = newValue!;
+                      //       });
+                      //     },
+                      //     items: mapAccount
+                      //         .map<DropdownMenuItem<String>>((String value) {
+                      //       return DropdownMenuItem<String>(
+                      //         value: value,
+                      //         child: Text(value),
+                      //       );
+                      //     }).toList(),
+                      //   ),
+                      // ),
                       GestureDetector(
                         onTap: () {
-                          if (dropdownValue != null) {
-                            AuthFirebase.signIn(
+                          AuthFirebase.signIn(
                                     emailController.text,
-                                    passwordController.text,
-                                    dropdownValue == 'admin' ? "1" : "0")
+                                    passwordController.text)
                                 .then((value) => Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            dropdownValue == 'admin'
+                                           value == '1'
                                                 ? HomeAdmin()
                                                 : HomeUser()),
                                     (route) => false))
@@ -155,13 +153,6 @@ class _LoginState extends State<Login> {
                                     builder: (BuildContext context) =>
                                         customErrorModal(
                                             context, "Terjadi kesalahan")));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    customErrorModal(
-                                        context, "Terjadi kesalahan"));
-                          }
                         },
                         child: Container(
                             // margin: EdgeInsets.only(top: 20),

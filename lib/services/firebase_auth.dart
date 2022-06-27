@@ -5,20 +5,21 @@ import 'package:firebase_database/firebase_database.dart';
 class AuthFirebase {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static Future<User> signIn(email, password, status) async {
+  static Future<String> signIn(email, password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user!;
       DataSnapshot data = await UserServices.ref.child(user.uid).get();
-      if (data.child('status').value.toString() == status) {
-        return user;
-      } else {
-        await _auth.signOut();
-        throw Exception("Your account don't have a access");
-        // throw "Your account don't have a access";
+      // if (data.child('status').value.toString() == status) {
+      //   return user;
+      // } else {
+      //   await _auth.signOut();
+      //   throw Exception("Your account don't have a access");
+      //   // throw "Your account don't have a access";
         
-      }
+      // }
+      return data.child('status').value.toString();
     } catch (e) {
       throw (e.toString());
     }
@@ -34,7 +35,7 @@ class AuthFirebase {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       await _auth.signOut();
-      await AuthFirebase.signIn(data[0], data[1], "1");
+      await AuthFirebase.signIn(data[0], data[1]);
       return userCredential.user!.uid;
     } catch (e) {
       throw e.toString();
