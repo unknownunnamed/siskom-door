@@ -11,14 +11,6 @@ class AuthFirebase {
           email: email, password: password);
       User user = result.user!;
       DataSnapshot data = await UserServices.ref.child(user.uid).get();
-      // if (data.child('status').value.toString() == status) {
-      //   return user;
-      // } else {
-      //   await _auth.signOut();
-      //   throw Exception("Your account don't have a access");
-      //   // throw "Your account don't have a access";
-        
-      // }
       return data.child('status').value.toString();
     } catch (e) {
       throw (e.toString());
