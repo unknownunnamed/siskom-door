@@ -52,8 +52,10 @@ class _KendaliPintuState extends State<KendaliPintu> {
                                 e.key.toString(),
                                 int.parse(e.child('pagiJam').value.toString()),
                                 int.parse(e.child('soreJam').value.toString()),
-                                int.parse(e.child('pagiMenit').value.toString()),
-                                int.parse(e.child('soreMenit').value.toString()));
+                                int.parse(
+                                    e.child('pagiMenit').value.toString()),
+                                int.parse(
+                                    e.child('soreMenit').value.toString()));
                           } catch (err) {
                             showDialog(
                                 context: context,
@@ -63,13 +65,18 @@ class _KendaliPintuState extends State<KendaliPintu> {
                           }
                         },
                         child: CustomKendaliCard(
-                            ruangan: e.key.toString(),
-                            isOpen: e.child('mSwitch').value.toString() == '1'
-                                ? true
-                                : false,
-                            isLock: e.child('kunci').value.toString() == '0'
-                                ? true
-                                : false),
+                          ruangan: e.key.toString(),
+                          isOpen: e.child('mSwitch').value.toString() == '1'
+                              ? true
+                              : false,
+                          isLock: e.child('kunci').value.toString() == '0'
+                              ? true
+                              : false,
+                          open:
+                              '${e.child('pagiJam').value.toString()}:${e.child('pagiMenit').value.toString()}',
+                              close:
+                              '${e.child('soreJam').value.toString()}:${e.child('soreMenit').value.toString()}',
+                        ),
                       ))
                   .toList(),
             )));
