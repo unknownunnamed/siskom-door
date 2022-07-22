@@ -15,6 +15,21 @@ class PintuServices {
     }
   }
 
+  static Future<void> addPintu(String namaPintu) async {
+    try {
+      await ref.child(namaPintu).set({
+        "kunci": 0,
+        "mSwitch": 0,
+        "pagiJam": 07,
+        "pagiMenit": 20,
+        "soreJam": 16,
+        "soreMenit": 00
+      });
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   static Future<void> changeOperasionalClose(
       String pintu, String jamClose, String menitClose) async {
     try {
@@ -29,7 +44,6 @@ class PintuServices {
       int jamClose, int menitOpen, int menitClose) async {
     try {
       DateTime now = DateTime.now();
-      print(menitClose);
       if (now.hour > jamOpen && now.hour < jamClose) {
         await ref.child(pintu).update({'kunci': kunci});
       } else if (now.hour == jamOpen &&
