@@ -48,7 +48,7 @@ class HomeAdmin extends StatelessWidget {
       ],
       [
         Icons.door_front_door,
-        "Data Pintu",
+        "Data Ruangan",
         () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Door()));

@@ -4,6 +4,7 @@ import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 import 'package:sisdoor/ui/widgets/custom_door_card.dart';
+import 'package:sisdoor/ui/widgets/custom_tambah_pintu_modal.dart';
 
 class Door extends StatefulWidget {
   const Door({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _DoorState extends State<Door> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: CustomColor.neutralWhite,
-        appBar: customAppbar(context, "Data Pintu"),
+        appBar: customAppbar(context, "Data Ruangan"),
         body: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -48,10 +49,10 @@ class _DoorState extends State<Door> {
                   bottom: 10,
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => TambahPengguna()));
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              customTambahPintulModal(context));
                     },
                     child: Container(
                         width: MediaQuery.of(context).size.width - 60,
@@ -63,7 +64,7 @@ class _DoorState extends State<Door> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100))),
                         child: Text(
-                          "Tambah Pintu",
+                          "Tambah Ruangan",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: CustomColor.neutralWhite,
