@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/firebase_auth.dart';
+import 'package:sisdoor/ui/screens/door.dart';
 import 'package:sisdoor/ui/screens/kendali_pintu.dart';
 import 'package:sisdoor/ui/screens/login.dart';
 import 'package:sisdoor/ui/screens/aktivitas_pengguna.dart';
@@ -43,6 +44,14 @@ class HomeAdmin extends StatelessWidget {
         () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Pengguna()));
+        }
+      ],
+      [
+        Icons.door_front_door,
+        "Data Pintu",
+        () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Door()));
         }
       ],
       [

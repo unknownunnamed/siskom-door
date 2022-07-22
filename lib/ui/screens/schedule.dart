@@ -89,7 +89,7 @@ class _ScheduleState extends State<Schedule> {
                 items: dataPintu.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(value.toUpperCase()),
                   );
                 }).toList(),
               ),

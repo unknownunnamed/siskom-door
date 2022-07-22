@@ -49,7 +49,7 @@ class _AktivitasPenggunaState extends State<AktivitasPengguna> {
                                     1000)
                                 .subtract(Duration(hours: 7))),
                         idkartu: e.child('nomor_kartu').value.toString(),
-                        ruangan: e.child('ruangan').value.toString(),
+                        ruangan: e.child('ruangan').value.toString().toUpperCase(),
                         isLock: e.child('status_kunci').value.toString() == "1"
                             ? false
                             : true,
