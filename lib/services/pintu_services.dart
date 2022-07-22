@@ -30,6 +30,10 @@ class PintuServices {
     }
   }
 
+  static Future<void> deletePintu(String namaPintu) async {
+    await ref.child(namaPintu).remove();
+  }
+
   static Future<void> changeOperasionalClose(
       String pintu, String jamClose, String menitClose) async {
     try {
