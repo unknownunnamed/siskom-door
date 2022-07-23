@@ -1,17 +1,22 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/pintu_services.dart';
+import 'package:sisdoor/ui/widgets/custom_error_modal.dart';
 import 'package:sisdoor/ui/widgets/custom_jam_operasional_modal.dart';
 
 class CustomKendaliCard extends StatelessWidget {
   final String ruangan, open, close;
   final bool isOpen, isLock;
+  final DataSnapshot e;
   const CustomKendaliCard(
       {Key? key,
       required this.ruangan,
       required this.isOpen,
       required this.isLock,
       required this.open,
-      required this.close})
+      required this.close,
+      required this.e})
       : super(key: key);
 
   @override
@@ -37,12 +42,33 @@ class CustomKendaliCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                isLock ? Icons.lock_outline : Icons.lock_open_outlined,
-                color: isLock
-                    ? CustomColor.primaryRose
-                    : CustomColor.secondaryGreen,
-                size: 30,
+              GestureDetector(
+                onTap: () async {
+                  try {
+                    await PintuServices.changeLock(
+                        e.child('kunci').value.toString() == '1' ? 0 : 1,
+                        e.key.toString(),
+                        int.parse(e.child('pagiJam').value.toString()),
+                        int.parse(e.child('soreJam').value.toString()),
+                        int.parse(e.child('pagiMenit').value.toString()),
+                        int.parse(e.child('soreMenit').value.toString()));
+                  } catch (err) {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => customErrorModal(
+                            context,
+                            err.toString() == 'Sudah diluar jam operasional'
+                                ? 'Sudah diluar jam operasional'
+                                : 'Terjadi kesalahan'));
+                  }
+                },
+                child: Icon(
+                  isLock ? Icons.lock_outline : Icons.lock_open_outlined,
+                  color: isLock
+                      ? CustomColor.primaryRose
+                      : CustomColor.secondaryGreen,
+                  size: 30,
+                ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -5,9 +5,10 @@ import 'package:sisdoor/config/custom_color.dart';
 AlertDialog customErrorModal(context, String text) {
   return AlertDialog(
     content: Container(
-      height: 400,
+      height: 420,
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
               width: MediaQuery.of(context).size.width,

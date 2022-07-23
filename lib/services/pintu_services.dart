@@ -21,7 +21,7 @@ class PintuServices {
         "kunci": 0,
         "mSwitch": 0,
         "pagiJam": 07,
-        "pagiMenit": 20,
+        "pagiMenit": 30,
         "soreJam": 16,
         "soreMenit": 00
       });
