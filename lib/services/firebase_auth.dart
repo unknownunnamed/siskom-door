@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -11,6 +12,7 @@ class AuthFirebase {
           email: email, password: password);
       User user = result.user!;
       DataSnapshot data = await UserServices.ref.child(user.uid).get();
+      await FirebaseMessaging.instance.subscribeToTopic("Buka-paksa");
       return data.child('status').value.toString();
     } catch (e) {
       throw (e.toString());
@@ -18,6 +20,7 @@ class AuthFirebase {
   }
 
   static Future<void> signOut() async {
+    await FirebaseMessaging.instance.unsubscribeFromTopic("Buka-paksa");
     _auth.signOut();
   }
 
@@ -33,7 +36,6 @@ class AuthFirebase {
       throw e.toString();
     }
   }
-
 
   static Future<List<String>> getEmailPassword() async {
     User? user = _auth.currentUser;
