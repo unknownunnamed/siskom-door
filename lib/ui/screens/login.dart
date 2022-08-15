@@ -17,7 +17,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  List<String> mapAccount = ["user", "admin"];
   String? dropdownValue;
   @override
   Widget build(BuildContext context) {
@@ -33,24 +32,37 @@ class _LoginState extends State<Login> {
                 height: MediaQuery.of(context).size.height / (5 / 2),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                            CustomColor.neutralBlack.withOpacity(0.5),
-                            BlendMode.srcOver),
-                        image: AssetImage("assets/images/bg_apk.png"),
-                        fit: BoxFit.cover)),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "Sistem Kendali dan Monitoring Keamanan Pintu",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: CustomColor.neutralWhite),
-                  ),
-                ),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                  NewCustomColor.firstGradientGreenColor,
+                  NewCustomColor.secondGradientGreenColor
+                ])),
+                child: Stack(children: [
+                  Positioned(
+                    top: - (MediaQuery.of(context).size.width/1.84)/3,
+                    right: - (MediaQuery.of(context).size.width/1.84)/6,
+                    child: Container(
+                    height: MediaQuery.of(context).size.width/1.84,
+                    width: MediaQuery.of(context).size.width/1.84,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.15)
+                    ),
+                  )),
+                   Positioned(
+                    bottom: (MediaQuery.of(context).size.width/3) / 4,
+                    right: - (MediaQuery.of(context).size.width/3)/2.5,
+                    child: Container(
+                    height: MediaQuery.of(context).size.width/3,
+                    width: MediaQuery.of(context).size.width/3,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.15)
+                    ),
+                  ))
+                ]),
               ),
               Column(children: [
                 SizedBox(
@@ -94,65 +106,22 @@ class _LoginState extends State<Login> {
                       ),
                       CustomPasswordForm(
                           controller: passwordController, label: "Password"),
-                      // Container(
-                      //   margin: EdgeInsets.only(bottom: 20),
-                      //   padding: EdgeInsets.only(left: 20, right: 30),
-                      //   decoration: BoxDecoration(
-                      //       color: CustomColor.neutralLightGray,
-                      //       borderRadius:
-                      //           BorderRadius.all(Radius.circular(100))),
-                      //   child: DropdownButton<String>(
-                      //     isExpanded: true,
-                      //     hint: Text(
-                      //       "Status Akun",
-                      //       style: TextStyle(
-                      //           color: CustomColor.neutralBlack,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w400),
-                      //     ),
-                      //     underline: SizedBox(),
-                      //     value: dropdownValue,
-                      //     icon: Icon(
-                      //       Icons.arrow_drop_down,
-                      //       color: CustomColor.neutralBlack,
-                      //     ),
-                      //     elevation: 16,
-                      //     style: TextStyle(
-                      //         color: CustomColor.neutralBlack,
-                      //         fontSize: 16,
-                      //         fontWeight: FontWeight.w400),
-                      //     onChanged: (String? newValue) {
-                      //       setState(() {
-                      //         dropdownValue = newValue!;
-                      //       });
-                      //     },
-                      //     items: mapAccount
-                      //         .map<DropdownMenuItem<String>>((String value) {
-                      //       return DropdownMenuItem<String>(
-                      //         value: value,
-                      //         child: Text(value),
-                      //       );
-                      //     }).toList(),
-                      //   ),
-                      // ),
                       GestureDetector(
                         onTap: () {
                           AuthFirebase.signIn(
-                                    emailController.text,
-                                    passwordController.text)
-                                .then((value) => Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                           value == '1'
-                                                ? HomeAdmin()
-                                                : HomeUser()),
-                                    (route) => false))
-                                .catchError((err) => showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        customErrorModal(
-                                            context, "Terjadi kesalahan")));
+                                  emailController.text, passwordController.text)
+                              .then((value) => Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => value == '1'
+                                          ? HomeAdmin()
+                                          : HomeUser()),
+                                  (route) => false))
+                              .catchError((err) => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      customErrorModal(
+                                          context, "Terjadi kesalahan")));
                         },
                         child: Container(
                             // margin: EdgeInsets.only(top: 20),

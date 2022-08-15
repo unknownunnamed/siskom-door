@@ -10,3 +10,8 @@ class CustomColor {
   static final Color neutralGray = Color(0xff808080);
   static final Color neutralLightGray = Color(0xffF2F2F2);
 }
+
+class NewCustomColor {
+  static final Color firstGradientGreenColor = Color(0xff5DB075);
+  static final Color secondGradientGreenColor = Color(0xff29D890);
+}
