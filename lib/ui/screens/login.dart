@@ -33,35 +33,57 @@ class _LoginState extends State<Login> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                  NewCustomColor.firstGradientGreenColor,
-                  NewCustomColor.secondGradientGreenColor
-                ])),
+                        begin: Alignment.topLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                      NewCustomColor.firstGradientGreenColor,
+                      NewCustomColor.secondGradientGreenColor
+                    ])),
                 child: Stack(children: [
                   Positioned(
-                    top: - (MediaQuery.of(context).size.width/1.84)/3,
-                    right: - (MediaQuery.of(context).size.width/1.84)/6,
-                    child: Container(
-                    height: MediaQuery.of(context).size.width/1.84,
-                    width: MediaQuery.of(context).size.width/1.84,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.15)
+                      top: -(MediaQuery.of(context).size.width / 1.84) / 3,
+                      right: -(MediaQuery.of(context).size.width / 1.84) / 6,
+                      child: Container(
+                        height: MediaQuery.of(context).size.width / 1.84,
+                        width: MediaQuery.of(context).size.width / 1.84,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.15)),
+                      )),
+                  Positioned(
+                      bottom: (MediaQuery.of(context).size.width / 3) / 4,
+                      right: -(MediaQuery.of(context).size.width / 3) / 2.5,
+                      child: Container(
+                        height: MediaQuery.of(context).size.width / 3,
+                        width: MediaQuery.of(context).size.width / 3,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.15)),
+                      )),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'SIKEPIN',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          'Sistem Monitoring dan Kendali Keamanan Pintu',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
                     ),
-                  )),
-                   Positioned(
-                    bottom: (MediaQuery.of(context).size.width/3) / 4,
-                    right: - (MediaQuery.of(context).size.width/3)/2.5,
-                    child: Container(
-                    height: MediaQuery.of(context).size.width/3,
-                    width: MediaQuery.of(context).size.width/3,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.15)
-                    ),
-                  ))
+                  )
                 ]),
               ),
               Column(children: [
@@ -82,20 +104,22 @@ class _LoginState extends State<Login> {
                   child: ListView(
                     children: [
                       Text(
-                        "Welcome !",
+                        "Selamat Datang",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: CustomColor.secondaryGold,
+                            fontFamily: 'Inter',
+                            color: NewCustomColor.primaryGreen,
                             fontSize: 20,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        "Login to your account",
+                        "Silahkan login akun anda",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: CustomColor.neutralGray,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                            fontFamily: 'Inter',
+                            color: NewCustomColor.primarygray,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
                         height: 20,

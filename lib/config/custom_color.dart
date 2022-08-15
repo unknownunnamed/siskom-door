@@ -14,4 +14,6 @@ class CustomColor {
 class NewCustomColor {
   static final Color firstGradientGreenColor = Color(0xff5DB075);
   static final Color secondGradientGreenColor = Color(0xff29D890);
+  static final Color primaryGreen = Color(0xff43A376);
+  static final Color primarygray = Color(0xff31364C);
 }
