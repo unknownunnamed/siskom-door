@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
+<<<<<<< HEAD
 // import 'package:sisdoor/ui/widgets/custom_error_modal.dart';
+=======
+>>>>>>> 1bfdaa259ebbc568a92872001df22eef1b910e19
 import 'package:sisdoor/ui/widgets/custom_kendali_card.dart';
 
 class KendaliPintu extends StatefulWidget {
