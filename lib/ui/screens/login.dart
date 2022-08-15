@@ -124,47 +124,171 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         height: 20,
                       ),
-                      CustomTextField(
-                        controller: emailController,
-                        label: "Email",
-                      ),
-                      CustomPasswordForm(
-                          controller: passwordController, label: "Password"),
-                      GestureDetector(
-                        onTap: () {
-                          AuthFirebase.signIn(
-                                  emailController.text, passwordController.text)
-                              .then((value) => Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => value == '1'
-                                          ? HomeAdmin()
-                                          : HomeUser()),
-                                  (route) => false))
-                              .catchError((err) => showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      customErrorModal(
-                                          context, "Terjadi kesalahan")));
-                        },
-                        child: Container(
-                            // margin: EdgeInsets.only(top: 20),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            decoration: BoxDecoration(
-                                color: CustomColor.secondaryGreen,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100))),
-                            child: Text(
-                              "Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: CustomColor.neutralWhite,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                      Container(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.only(bottom: 42),
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  color: NewCustomColor.bgCard,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.25),
+                                        offset: Offset(0, 4),
+                                        blurRadius: 4,
+                                        spreadRadius: 0)
+                                  ]),
+                              child: Stack(children: [
+                                Positioned(
+                                    bottom:
+                                        -(MediaQuery.of(context).size.width /
+                                                1.5) /
+                                            3,
+                                    left: -(MediaQuery.of(context).size.width /
+                                            1.5) /
+                                        4,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width /
+                                              1.5,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.5,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: NewCustomColor.firstGreenCard),
+                                    )),
+                                Positioned(
+                                    bottom:
+                                        -(MediaQuery.of(context).size.width /
+                                                2.6) /
+                                            2.5,
+                                    left:
+                                        (MediaQuery.of(context).size.width / 5),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width /
+                                              2.6,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.6,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color:
+                                              NewCustomColor.secondGreenCard),
+                                    )),
+                                Positioned(
+                                    top: -(MediaQuery.of(context).size.width /
+                                            2.9) /
+                                        2,
+                                    right: -(MediaQuery.of(context).size.width /
+                                            2.9) /
+                                        3.5,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width /
+                                              2.9,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.9,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color:
+                                              NewCustomColor.secondGreenCard),
+                                    )),
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(23, 23, 23, 54),
+                                  child: Column(
+                                    children: [
+                                      CustomTextField(
+                                        controller: emailController,
+                                        label: "Email",
+                                      ),
+                                      CustomPasswordForm(
+                                          controller: passwordController,
+                                          label: "Password"),
+                                    ],
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 60,
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: Center(
+                                  child: Container(
+                                    height: 64,
+                                    width: 64,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black
+                                                  .withOpacity(0.25),
+                                              offset: Offset(0, 4),
+                                              blurRadius: 4,
+                                              spreadRadius: 0)
+                                        ]),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        size: 24,
+                                        color: NewCustomColor.secondGreen,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            )),
-                      )
+                            )
+                          ],
+                        ),
+                      ),
+
+                      // CustomTextField(
+                      //   controller: emailController,
+                      //   label: "Email",
+                      // ),
+                      // CustomPasswordForm(
+                      //     controller: passwordController, label: "Password"),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     AuthFirebase.signIn(
+                      //             emailController.text, passwordController.text)
+                      //         .then((value) => Navigator.pushAndRemoveUntil(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) => value == '1'
+                      //                     ? HomeAdmin()
+                      //                     : HomeUser()),
+                      //             (route) => false))
+                      //         .catchError((err) => showDialog(
+                      //             context: context,
+                      //             builder: (BuildContext context) =>
+                      //                 customErrorModal(
+                      //                     context, "Terjadi kesalahan")));
+                      //   },
+                      //   child: Container(
+                      //       // margin: EdgeInsets.only(top: 20),
+                      //       padding: EdgeInsets.symmetric(
+                      //           horizontal: 20, vertical: 15),
+                      //       decoration: BoxDecoration(
+                      //           color: CustomColor.secondaryGreen,
+                      //           borderRadius:
+                      //               BorderRadius.all(Radius.circular(100))),
+                      //       child: Text(
+                      //         "Login",
+                      //         textAlign: TextAlign.center,
+                      //         style: TextStyle(
+                      //           color: CustomColor.neutralWhite,
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+                      //       )),
+                      // )
                     ],
                   ),
                 )
