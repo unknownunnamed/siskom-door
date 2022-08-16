@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
                       50,
                   padding: EdgeInsets.fromLTRB(30, 25, 30, 5),
                   decoration: BoxDecoration(
-                      color: CustomColor.neutralWhite,
+                      color: NewCustomColor.bgGreen,
                       borderRadius:
                           BorderRadius.only(topLeft: Radius.circular(60))),
                   child: ListView(
@@ -147,7 +147,7 @@ class _LoginState extends State<Login> {
                                     bottom:
                                         -(MediaQuery.of(context).size.width /
                                                 1.5) /
-                                            3,
+                                            2.7,
                                     left: -(MediaQuery.of(context).size.width /
                                             1.5) /
                                         4,
@@ -165,7 +165,7 @@ class _LoginState extends State<Login> {
                                     bottom:
                                         -(MediaQuery.of(context).size.width /
                                                 2.6) /
-                                            2.5,
+                                            2.3,
                                     left:
                                         (MediaQuery.of(context).size.width / 5),
                                     child: Container(
@@ -198,7 +198,7 @@ class _LoginState extends State<Login> {
                                               NewCustomColor.secondGreenCard),
                                     )),
                                 Container(
-                                  padding: EdgeInsets.fromLTRB(23, 23, 23, 54),
+                                  padding: EdgeInsets.fromLTRB(23, 23, 23, 40),
                                   child: Column(
                                     children: [
                                       CustomTextField(
@@ -215,29 +215,49 @@ class _LoginState extends State<Login> {
                             ),
                             Positioned(
                               bottom: 0,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 60,
-                                padding: EdgeInsets.only(bottom: 10),
-                                child: Center(
-                                  child: Container(
-                                    height: 64,
-                                    width: 64,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black
-                                                  .withOpacity(0.25),
-                                              offset: Offset(0, 4),
-                                              blurRadius: 4,
-                                              spreadRadius: 0)
-                                        ]),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.arrow_forward,
-                                        size: 24,
-                                        color: NewCustomColor.secondGreen,
+                              child: GestureDetector(
+                                onTap: () {
+                                  AuthFirebase.signIn(emailController.text,
+                                          passwordController.text)
+                                      .then((value) =>
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      value == '1'
+                                                          ? HomeAdmin()
+                                                          : HomeUser()),
+                                              (route) => false))
+                                      .catchError((err) => showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              customErrorModal(context,
+                                                  "Terjadi kesalahan")));
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width - 60,
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: Center(
+                                    child: Container(
+                                      height: 64,
+                                      width: 64,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.25),
+                                                offset: Offset(0, 4),
+                                                blurRadius: 4,
+                                                spreadRadius: 0)
+                                          ]),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.arrow_forward,
+                                          size: 32,
+                                          color: NewCustomColor.secondGreen,
+                                        ),
                                       ),
                                     ),
                                   ),

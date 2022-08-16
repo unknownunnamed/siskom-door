@@ -16,7 +16,11 @@ class NewCustomColor {
   static final Color secondGradientGreenColor = Color(0xff29D890);
   static final Color primaryGreen = Color(0xff43A376);
   static final Color secondGreen = Color(0xff71BA866);
+  static final Color thirdGreen = Color(0xff36CE89);
+  static final Color bgGreen = Color(0xffFBFDFF);
   static final Color primarygray = Color(0xff31364C);
+  static final Color secondgray = Color(0xff838383);
+  static final Color thirdgray = Color(0xffD2D2D2);  
   static final Color bgCard = Color(0xffEFEFEF);
   static final Color firstGreenCard = Color(0xff94D0AD);
   static final Color secondGreenCard = Color(0xffC7E2D2);

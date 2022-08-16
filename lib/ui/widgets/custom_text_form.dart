@@ -15,22 +15,24 @@ class CustomTextField extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-          color: CustomColor.neutralLightGray,
-          borderRadius: BorderRadius.all(Radius.circular(100))),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       child: TextFormField(
         controller: controller,
         keyboardType: inputType ?? TextInputType.text,
         style: TextStyle(
-            color: CustomColor.neutralBlack,
-            fontSize: 16,
-            fontWeight: FontWeight.w400),
+          fontFamily: 'Inter',
+            color: NewCustomColor.primarygray,
+            fontSize: 15,
+            fontWeight: FontWeight.w600),
         decoration: InputDecoration(
           hintText: label,
           
           hintStyle: TextStyle(
-              color: CustomColor.neutralBlack,
-              fontSize: 16,
-              fontWeight: FontWeight.w400),
+          fontFamily: 'Inter',
+              color: NewCustomColor.primarygray,
+              fontSize: 15,
+              fontWeight: FontWeight.w600),
               border: InputBorder.none
         ),
       ),

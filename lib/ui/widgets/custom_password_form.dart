@@ -20,15 +20,15 @@ class _CustomPasswordFormState extends State<CustomPasswordForm> {
       margin: EdgeInsets.only(bottom: 20),
       padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-          color: CustomColor.neutralLightGray,
-          borderRadius: BorderRadius.all(Radius.circular(100))),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       child: TextFormField(
         controller: widget.controller,
         obscureText: !isShow,
         style: TextStyle(
-            color: CustomColor.neutralBlack,
-            fontSize: 16,
-            fontWeight: FontWeight.w400),
+            color: NewCustomColor.primarygray,
+            fontSize: 15,
+            fontWeight: FontWeight.w600),
         decoration: InputDecoration(
             suffixIcon: GestureDetector(
               onTap: () {
@@ -40,15 +40,15 @@ class _CustomPasswordFormState extends State<CustomPasswordForm> {
                 isShow
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
-                size: 18,
-                color: CustomColor.neutralBlack,
+                size: 22,
+                color: NewCustomColor.secondgray,
               ),
             ),
             hintText: widget.label,
             hintStyle: TextStyle(
-                color: CustomColor.neutralBlack,
-                fontSize: 16,
-                fontWeight: FontWeight.w400),
+                color: NewCustomColor.primarygray,
+                fontSize: 15,
+                fontWeight: FontWeight.w600),
             border: InputBorder.none),
       ),
     );

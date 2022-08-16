@@ -2,170 +2,135 @@ import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/ui/screens/door.dart';
+import 'package:sisdoor/ui/screens/home_page.dart';
 import 'package:sisdoor/ui/screens/kendali_pintu.dart';
 import 'package:sisdoor/ui/screens/login.dart';
 import 'package:sisdoor/ui/screens/aktivitas_pengguna.dart';
 import 'package:sisdoor/ui/screens/pengguna.dart';
 import 'package:sisdoor/ui/screens/schedule.dart';
 
-class HomeAdmin extends StatelessWidget {
+class HomeAdmin extends StatefulWidget {
   const HomeAdmin({Key? key}) : super(key: key);
 
+  @override
+  State<HomeAdmin> createState() => _HomeAdminState();
+}
+
+class _HomeAdminState extends State<HomeAdmin> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     List<List<dynamic>> menu = [
       [
-        Icons.lock_clock,
-        "Atur Jadwal Operasional",
-        () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Schedule()));
-        }
+        'home.png',
+        'home_active.png',
+        "Beranda",
+        HomePage()
+        // () {
+        //   Navigator.push(
+        //       context, MaterialPageRoute(builder: (context) => Schedule()));
+        // }
       ],
       [
-        Icons.room_preferences,
-        "Kendali Pintu",
-        () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => KendaliPintu()));
-        }
-      ],
-      [
-        Icons.meeting_room,
+        'jadwal.png',
+        'jadwal_active.png',
         "Aktivitas Pengguna",
-        () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AktivitasPengguna()));
-        }
+        HomePage()
+        // () {
+        //   Navigator.push(context,
+        //       MaterialPageRoute(builder: (context) => AktivitasPengguna()));
+        // }
       ],
       [
-        Icons.data_usage,
+        'pengguna.png',
+        'pengguna_active.png',
         "Data Pengguna",
-        () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Pengguna()));
-        }
+        HomePage()
+        // () {
+        //   Navigator.push(
+        //       context, MaterialPageRoute(builder: (context) => Pengguna()));
+        // }
       ],
       [
-        Icons.door_front_door,
+        'pintu.png',
+        'pintu_active.png',
         "Data Ruangan",
-        () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Door()));
-        }
+        HomePage()
+        // () {
+        //   Navigator.push(
+        //       context, MaterialPageRoute(builder: (context) => Door()));
+        // }
       ],
-      [
-        Icons.logout,
-        "Logout",
-        () async {
-          await AuthFirebase.signOut();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-              (route) => false);
-        }
-      ]
+      // [
+      //   Icons.logout,
+      //   "Logout",
+      //   () async {
+      //     await AuthFirebase.signOut();
+      //     Navigator.pushAndRemoveUntil(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => Login()),
+      //         (route) => false);
+      //   }
+      // ]
     ];
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: CustomColor.neutralWhite,
-      body: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / (5 / 2),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                            CustomColor.neutralBlack.withOpacity(0.5),
-                            BlendMode.srcOver),
-                        image: AssetImage("assets/images/bg_apk.png"),
-                        fit: BoxFit.cover)),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "Sistem Kendali dan Monitoring Keamanan Pintu",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: CustomColor.neutralWhite),
-                  ),
-                ),
-              ),
-              Column(children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / (5 / 2) - 50,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).viewInsets.bottom -
-                      MediaQuery.of(context).size.height / (5 / 2) +
-                      50,
-                  padding: EdgeInsets.fromLTRB(30, 25, 30, 5),
-                  decoration: BoxDecoration(
-                      color: CustomColor.neutralWhite,
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(60))),
-                  child: ListView(
-                    children: menu
-                        .map((e) => GestureDetector(
-                              onTap: e[2],
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                margin: EdgeInsets.only(bottom: 20),
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    color: CustomColor.neutralWhite,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: CustomColor.neutralGray
-                                            .withOpacity(0.15),
-                                        spreadRadius: 0,
-                                        blurRadius: 10,
-                                        offset: Offset(0, 0),
-                                      ),
-                                    ]),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      e[0],
-                                      color: CustomColor.neutralGray,
-                                      size: 40,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          (5 / 3),
-                                      child: Text(
-                                        e[1],
-                                        style: TextStyle(
-                                            color: CustomColor.neutralGray,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                  ),
-                )
-              ])
-            ],
-          )),
+      body: Column(
+        children: [
+          menu[index][3],
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 85,
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  offset: Offset(0, -5),
+                  blurRadius: 22,
+                  spreadRadius: 0)
+            ]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: menu
+                  .asMap()
+                  .entries
+                  .map((e) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            index = e.key;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: AssetImage(
+                                  'assets/images/${(index == e.key) ? e.value[1] : e.value[0]}'),
+                              height: 23.33,
+                            ),
+                            SizedBox(
+                              height: 11,
+                            ),
+                            Text(
+                              e.value[1],
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w500,
+                                  color: index == e.key
+                                      ? NewCustomColor.firstGradientGreenColor
+                                      : NewCustomColor.thirdgray),
+                            )
+                          ],
+                        ),
+                      ))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
