@@ -32,13 +32,10 @@ class _PenggunaState extends State<Pengguna> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: CustomColor.neutralWhite,
-        appBar: customAppbar(context, "Data Pengguna"),
-        body: SizedBox(
+    return SizedBox(
             // padding: EdgeInsets.symmetric(horizontal: 30),
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height - 85,
             child: Stack(
               children: [
                 ListView(
@@ -78,6 +75,6 @@ class _PenggunaState extends State<Pengguna> {
                   ),
                 )
               ],
-            )));
+            ));
   }
 }

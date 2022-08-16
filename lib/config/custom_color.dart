@@ -24,4 +24,6 @@ class NewCustomColor {
   static final Color bgCard = Color(0xffEFEFEF);
   static final Color firstGreenCard = Color(0xff94D0AD);
   static final Color secondGreenCard = Color(0xffC7E2D2);
+  static final Color shadowCard = Color(0xffBDBDBD);
+
 }

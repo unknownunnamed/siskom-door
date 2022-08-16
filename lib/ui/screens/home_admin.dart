@@ -35,7 +35,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         'jadwal.png',
         'jadwal_active.png',
         "Aktivitas Pengguna",
-        HomePage()
+        AktivitasPengguna()
         // () {
         //   Navigator.push(context,
         //       MaterialPageRoute(builder: (context) => AktivitasPengguna()));
@@ -45,7 +45,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         'pengguna.png',
         'pengguna_active.png',
         "Data Pengguna",
-        HomePage()
+        Pengguna()
         // () {
         //   Navigator.push(
         //       context, MaterialPageRoute(builder: (context) => Pengguna()));
@@ -55,7 +55,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         'pintu.png',
         'pintu_active.png',
         "Data Ruangan",
-        HomePage()
+        Door()
         // () {
         //   Navigator.push(
         //       context, MaterialPageRoute(builder: (context) => Door()));

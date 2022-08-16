@@ -31,12 +31,9 @@ class _DoorState extends State<Door> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: CustomColor.neutralWhite,
-        appBar: customAppbar(context, "Data Ruangan"),
-        body: SizedBox(
+    return SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height - 85,
             child: Stack(
               children: [
                 ListView(
@@ -75,6 +72,6 @@ class _DoorState extends State<Door> {
                   ),
                 )
               ],
-            )));
+            ));
   }
 }

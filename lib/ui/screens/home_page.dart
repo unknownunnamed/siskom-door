@@ -1,7 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
+import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/services/pintu_services.dart';
+import 'package:sisdoor/ui/screens/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     initData();
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -65,21 +68,30 @@ class _HomePageState extends State<HomePage> {
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(0.15)),
                     )),
-                    Positioned(
+                Positioned(
                     top: 33,
                     right: 13,
-                    child: Container(
-                        width: 41,
-                        height: 41,
-                        decoration: BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: Center(
-                          child: Icon(
-                            Icons.logout_outlined,
-                            size: 12,
-                            color: NewCustomColor.thirdGreen,
-                          ),
-                        ))),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await AuthFirebase.signOut();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                            (route) => false);
+                      },
+                      child: Container(
+                          width: 41,
+                          height: 41,
+                          decoration: BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
+                          child: Center(
+                            child: Icon(
+                              Icons.logout_outlined,
+                              size: 20,
+                              color: NewCustomColor.thirdGreen,
+                            ),
+                          )),
+                    )),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
@@ -104,7 +116,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                
               ]),
             ),
             Column(children: [
@@ -118,62 +129,68 @@ class _HomePageState extends State<HomePage> {
                     MediaQuery.of(context).size.height / (5 / 2) +
                     50 -
                     85,
-                padding: EdgeInsets.fromLTRB(30, 25, 30, 5),
+                padding: EdgeInsets.fromLTRB(0, 44, 0, 5),
                 decoration: BoxDecoration(
                     color: NewCustomColor.bgGreen,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(60))),
-                // child: ListView(
-                //   children: menu
-                //       .map((e) => GestureDetector(
-                //             // onTap: e[2],
-                //             child: Container(
-                //               padding: EdgeInsets.symmetric(
-                //                   horizontal: 20, vertical: 20),
-                //               margin: EdgeInsets.only(bottom: 20),
-                //               width: MediaQuery.of(context).size.width,
-                //               decoration: BoxDecoration(
-                //                   color: CustomColor.neutralWhite,
-                //                   borderRadius: BorderRadius.all(
-                //                       Radius.circular(20)),
-                //                   boxShadow: [
-                //                     BoxShadow(
-                //                       color: CustomColor.neutralGray
-                //                           .withOpacity(0.15),
-                //                       spreadRadius: 0,
-                //                       blurRadius: 10,
-                //                       offset: Offset(0, 0),
-                //                     ),
-                //                   ]),
-                //               child: Row(
-                //                 children: [
-                //                   Icon(
-                //                     e[0],
-                //                     color: CustomColor.neutralGray,
-                //                     size: 40,
-                //                   ),
-                //                   SizedBox(
-                //                     width: 20,
-                //                   ),
-                //                   SizedBox(
-                //                     width: MediaQuery.of(context)
-                //                             .size
-                //                             .width /
-                //                         (5 / 3),
-                //                     child: Text(
-                //                       e[1],
-                //                       style: TextStyle(
-                //                           color: CustomColor.neutralGray,
-                //                           fontSize: 16,
-                //                           fontWeight: FontWeight.w500),
-                //                     ),
-                //                   )
-                //                 ],
-                //               ),
-                //             ),
-                //           ))
-                //       .toList(),
-                // ),
+                child: GridView(
+                  padding: EdgeInsets.only(left: 14, right: 14),
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    mainAxisSpacing: MediaQuery.of(context).size.width / 30,
+                    crossAxisSpacing: MediaQuery.of(context).size.width / 30,
+                    childAspectRatio: 1 / 0.7,
+                  ),
+                  children: data
+                      .map((e) => Container(
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: NewCustomColor.shadowCard
+                                          .withOpacity(0.7),
+                                      offset: Offset(1, 1),
+                                      blurRadius: 4,
+                                      spreadRadius: 0)
+                                ]),
+                            child: Column(
+                              children: [
+                                Container(
+                                  color: NewCustomColor.firstGradientGreenColor,
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.only(top: 10, bottom: 9),
+                                  child: Center(
+                                      child: Text(
+                                    e.key.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 17,
+                                        color: Colors.white),
+                                  )),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(e.child('kunci').value.toString() == '0'
+                                          ? Icons.lock_outlined
+                                          : Icons.lock_open_outlined)
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ))
+                      .toList(),
+                ),
               )
             ])
           ],

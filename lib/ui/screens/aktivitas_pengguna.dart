@@ -32,13 +32,10 @@ class _AktivitasPenggunaState extends State<AktivitasPengguna> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: CustomColor.neutralWhite,
-        appBar: customAppbar(context, "Aktivitas Pengguna"),
-        body: SizedBox(
+    return SizedBox(
             // padding: EdgeInsets.symmetric(horizontal: 30),
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height - 85,
             child: ListView(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               children: data
@@ -55,6 +52,6 @@ class _AktivitasPenggunaState extends State<AktivitasPengguna> {
                             : true,
                       ))
                   .toList(),
-            )));
+            ));
   }
 }
