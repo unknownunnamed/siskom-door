@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(60))),
                 child: GridView(
-                  padding: EdgeInsets.only(left: 14, right: 14),
+                  padding: EdgeInsets.only(left: 14, right: 14, bottom: 20),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
                     mainAxisSpacing: MediaQuery.of(context).size.width / 30,
