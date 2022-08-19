@@ -5,6 +5,7 @@ import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/screens/login.dart';
 import 'package:sisdoor/ui/screens/schedule.dart';
+import 'package:sisdoor/ui/widgets/custom_error_modal.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -183,17 +184,62 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Icon(
-                                        e.child('kunci').value.toString() == '0'
-                                            ? Icons.lock_outlined
-                                            : Icons.lock_open_outlined,
-                                        size: 33,
-                                        color:
-                                            e.child('kunci').value.toString() ==
-                                                    '0'
-                                                ? NewCustomColor
-                                                    .firstGradientGreenColor
-                                                : NewCustomColor.firstRed,
+                                      GestureDetector(
+                                        onTap: () async {
+                                          try {
+                                            await PintuServices.changeLock(
+                                                e
+                                                            .child('kunci')
+                                                            .value
+                                                            .toString() ==
+                                                        '1'
+                                                    ? 0
+                                                    : 1,
+                                                e.key.toString(),
+                                                int.parse(e
+                                                    .child('pagiJam')
+                                                    .value
+                                                    .toString()),
+                                                int.parse(e
+                                                    .child('soreJam')
+                                                    .value
+                                                    .toString()),
+                                                int.parse(e
+                                                    .child('pagiMenit')
+                                                    .value
+                                                    .toString()),
+                                                int.parse(e
+                                                    .child('soreMenit')
+                                                    .value
+                                                    .toString()));
+                                          } catch (err) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    customErrorModal(
+                                                        context,
+                                                        err.toString() ==
+                                                                'Sudah diluar jam operasional'
+                                                            ? 'Sudah diluar jam operasional'
+                                                            : 'Terjadi kesalahan'));
+                                          }
+                                        },
+                                        child: Icon(
+                                          e.child('kunci').value.toString() ==
+                                                  '0'
+                                              ? Icons.lock_outlined
+                                              : Icons.lock_open_outlined,
+                                          size: 33,
+                                          color: e
+                                                      .child('kunci')
+                                                      .value
+                                                      .toString() ==
+                                                  '0'
+                                              ? NewCustomColor
+                                                  .firstGradientGreenColor
+                                              : NewCustomColor.firstRed,
+                                        ),
                                       ),
                                       Column(
                                           mainAxisAlignment:

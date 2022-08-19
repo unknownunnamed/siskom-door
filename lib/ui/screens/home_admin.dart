@@ -115,7 +115,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                               height: 11,
                             ),
                             Text(
-                              e.value[1],
+                              e.value[2],
                               style: TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w500,
