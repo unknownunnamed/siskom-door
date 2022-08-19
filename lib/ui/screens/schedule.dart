@@ -1,10 +1,11 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
-import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 
 class Schedule extends StatefulWidget {
-  const Schedule({Key? key}) : super(key: key);
+  final String key_pintu;
+  const Schedule({Key? key, required this.key_pintu}) : super(key: key);
 
   @override
   State<Schedule> createState() => _ScheduleState();
@@ -22,15 +23,14 @@ class _ScheduleState extends State<Schedule> {
     for (var i = 0; i < 60; i += 1) i < 10 ? '0$i' : i.toString()
   ];
 
-  String? ruangan, jamOpen, menitOpen, jamClose, menitClose;
+  String? jamOpen, menitOpen, jamClose, menitClose;
 
-  List<String> dataPintu = [];
+  DataSnapshot? dataPintu;
 
   void initData() async {
-    PintuServices.ref.onValue.listen((event) {
+    PintuServices.ref.child(widget.key_pintu).onValue.listen((event) {
       setState(() {
-        dataPintu =
-            event.snapshot.children.map((e) => e.key.toString()).toList();
+        dataPintu = event.snapshot;
       });
     });
   }
@@ -44,400 +44,629 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.neutralWhite,
-      appBar: customAppbar(context, "Atur Jadwal Operasional"),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: ListView(
+        child: Stack(
           children: [
-            SizedBox(
-              height: 40,
-            ),
             Container(
-              margin: EdgeInsets.only(bottom: 20),
-              padding: EdgeInsets.only(left: 20, right: 30),
-              decoration: BoxDecoration(
-                  color: CustomColor.neutralLightGray,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                hint: Text(
-                  "Pilih Ruangan",
-                  style: TextStyle(
-                      color: CustomColor.neutralBlack,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400),
-                ),
-                underline: SizedBox(),
-                value: ruangan,
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: CustomColor.neutralBlack,
-                ),
-                elevation: 16,
-                style: TextStyle(
-                    color: CustomColor.neutralBlack,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    ruangan = newValue!;
-                  });
-                },
-                items: dataPintu.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value.toUpperCase()),
-                  );
-                }).toList(),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              margin: EdgeInsets.only(bottom: 20),
+              height: MediaQuery.of(context).size.height / (5 / 2),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: CustomColor.neutralWhite,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: CustomColor.neutralGray.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 10,
-                      offset: Offset(0, 0),
-                    ),
-                  ]),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      "Jadwal Buka Pintu",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: CustomColor.neutralGray,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Row(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                    NewCustomColor.firstGradientGreenColor,
+                    NewCustomColor.secondGradientGreenColor
+                  ])),
+              child: Stack(children: [
+                Positioned(
+                    top: -(MediaQuery.of(context).size.width / 1.84) / 3,
+                    right: -(MediaQuery.of(context).size.width / 1.84) / 6,
+                    child: Container(
+                      height: MediaQuery.of(context).size.width / 1.84,
+                      width: MediaQuery.of(context).size.width / 1.84,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white.withOpacity(0.15)),
+                    )),
+                Positioned(
+                    bottom: (MediaQuery.of(context).size.width / 3) / 4,
+                    right: -(MediaQuery.of(context).size.width / 3) / 2.5,
+                    child: Container(
+                      height: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery.of(context).size.width / 3,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white.withOpacity(0.15)),
+                    )),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(left: 13, right: 13, top: 51),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 15, top: 15),
-                        padding: EdgeInsets.only(left: 20),
-                        decoration: BoxDecoration(
-                            color: CustomColor.neutralLightGray,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        child: Center(
-                          child: DropdownButton<String>(
-                            hint: Text(
-                              "Jam",
-                              style: TextStyle(
-                                  color: CustomColor.neutralBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            underline: SizedBox(),
-                            value: jamOpen,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: CustomColor.neutralLightGray,
-                            ),
-                            elevation: 16,
-                            style: TextStyle(
-                                color: CustomColor.neutralBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                jamOpen = newValue!;
-                              });
-                            },
-                            items: hour
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          padding: EdgeInsets.only(left: 7),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
                           ),
+                          child: Center(
+                              child: Icon(
+                            Icons.arrow_back_ios,
+                            size: 20,
+                            color: NewCustomColor.firstGradientGreenColor,
+                          )),
+                        ),
+                      ),
+                      Text(
+                        'ATUR JADWAL OPERASIONAL',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 19),
+                      ),
+                      Container(
+                        height: 28,
+                        width: 28,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ]),
+            ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 105,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: NewCustomColor.bgGreen,
+                      borderRadius:
+                          BorderRadius.only(topLeft: Radius.circular(60))),
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 105,
+                  child: ListView(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                          padding: EdgeInsets.only(top: 7, bottom: 7),
+                          margin: EdgeInsets.only(bottom: 31),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(4, 4),
+                                    blurRadius: 10,
+                                    spreadRadius: 0)
+                              ]),
+                          child: Center(
+                            child: Text(
+                              'Jam Operasional : ${dataPintu!.child('pagiJam').value.toString().length > 1 ? dataPintu!.child('pagiJam').value.toString() : '0' + dataPintu!.child('pagiJam').value.toString()}.${dataPintu!.child('pagiMenit').value.toString().length > 1 ? dataPintu!.child('pagiMenit').value.toString() : '0' + dataPintu!.child('pagiMenit').value.toString()} - ${dataPintu!.child('soreJam').value.toString().length > 1 ? dataPintu!.child('soreJam').value.toString() : '0' + dataPintu!.child('soreJam').value.toString()}.${dataPintu!.child('soreMenit').value.toString().length > 1 ? dataPintu!.child('soreMenit').value.toString() : '0' + dataPintu!.child('soreMenit').value.toString()}',
+                              style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: NewCustomColor.primarygray),
+                            ),
+                          )),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.only(bottom: 31),
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                            color: NewCustomColor.bgCard,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ]),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                bottom:
+                                    -(MediaQuery.of(context).size.width / 1.5) /
+                                        2.7,
+                                left:
+                                    -(MediaQuery.of(context).size.width / 1.5) /
+                                        4,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.firstGreenCard),
+                                )),
+                            Positioned(
+                                bottom:
+                                    -(MediaQuery.of(context).size.width / 2.6) /
+                                        2.3,
+                                left: (MediaQuery.of(context).size.width / 5),
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 2.6,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.6,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.secondGreenCard),
+                                )),
+                            Positioned(
+                                top:
+                                    -(MediaQuery.of(context).size.width / 2.9) /
+                                        2,
+                                right:
+                                    -(MediaQuery.of(context).size.width / 2.9) /
+                                        3.5,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 2.9,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.9,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.secondGreenCard),
+                                )),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(30, 14, 30, 23),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Text(
+                                      "Jadwal Buka Pintu",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          color: NewCustomColor.primarygray,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 15, top: 15),
+                                        padding: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3.3,
+                                        child: Center(
+                                          child: DropdownButton<String>(
+                                            hint: Text(
+                                              "Jam",
+                                              style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  color:
+                                                      CustomColor.neutralBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            underline: SizedBox(),
+                                            value: jamOpen,
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color:
+                                                  CustomColor.neutralLightGray,
+                                            ),
+                                            elevation: 16,
+                                            style: TextStyle(
+                                                color: CustomColor.neutralBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                jamOpen = newValue!;
+                                              });
+                                            },
+                                            items: hour
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 15, top: 15),
+                                        padding: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3.3,
+                                        child: Center(
+                                          child: DropdownButton<String>(
+                                            hint: Text(
+                                              "Menit",
+                                              style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  color:
+                                                      CustomColor.neutralBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            underline: SizedBox(),
+                                            value: menitOpen,
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color:
+                                                  CustomColor.neutralLightGray,
+                                            ),
+                                            elevation: 16,
+                                            style: TextStyle(
+                                                color: CustomColor.neutralBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                menitOpen = newValue!;
+                                              });
+                                            },
+                                            items: minutes
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (!isProsesOpen) {
+                                        setState(() {
+                                          isProsesOpen = true;
+                                        });
+                                        PintuServices.changeOperasionalOpen(
+                                                widget.key_pintu,
+                                                jamOpen!,
+                                                menitOpen!)
+                                            .then((value) => setState(() {
+                                                  isProsesOpen = false;
+                                                }))
+                                            .catchError((err) {
+                                          setState(() {
+                                            isProsesOpen = false;
+                                          });
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 14),
+                                      decoration: BoxDecoration(
+                                          color: (jamOpen != null &&
+                                                  menitOpen != null &&
+                                                  !isProsesOpen)
+                                              ? NewCustomColor.primaryBlue
+                                              : Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black
+                                                  .withOpacity(0.25),
+                                              spreadRadius: 0,
+                                              blurRadius: 4,
+                                              offset: Offset(1, 1),
+                                            ),
+                                          ]),
+                                      child: Text(
+                                        !isProsesClose ? "Simpan" : "Proses",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: (jamOpen != null &&
+                                                    menitOpen != null &&
+                                                    !isProsesOpen)
+                                                ? Colors.white
+                                                : NewCustomColor.primaryBlue,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 15, top: 15),
-                        padding: EdgeInsets.only(left: 20),
+                        width: MediaQuery.of(context).size.width,
+                        clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(
-                            color: CustomColor.neutralLightGray,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        child: Center(
-                          child: DropdownButton<String>(
-                            hint: Text(
-                              "Menit",
-                              style: TextStyle(
-                                  color: CustomColor.neutralBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
+                            color: NewCustomColor.bgCard,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ]),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                bottom:
+                                    -(MediaQuery.of(context).size.width / 1.5) /
+                                        2.7,
+                                left:
+                                    -(MediaQuery.of(context).size.width / 1.5) /
+                                        4,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.firstGreenCard),
+                                )),
+                            Positioned(
+                                bottom:
+                                    -(MediaQuery.of(context).size.width / 2.6) /
+                                        2.3,
+                                left: (MediaQuery.of(context).size.width / 5),
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 2.6,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.6,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.secondGreenCard),
+                                )),
+                            Positioned(
+                                top:
+                                    -(MediaQuery.of(context).size.width / 2.9) /
+                                        2,
+                                right:
+                                    -(MediaQuery.of(context).size.width / 2.9) /
+                                        3.5,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 2.9,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.9,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: NewCustomColor.secondGreenCard),
+                                )),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(30, 14, 30, 23),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Text(
+                                      "Jadwal Kunci Pintu",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          color: NewCustomColor.primarygray,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 15, top: 15),
+                                        padding: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3.3,
+                                        child: Center(
+                                          child: DropdownButton<String>(
+                                            hint: Text(
+                                              "Jam",
+                                              style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  color:
+                                                      CustomColor.neutralBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            underline: SizedBox(),
+                                            value: jamClose,
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color:
+                                                  CustomColor.neutralLightGray,
+                                            ),
+                                            elevation: 16,
+                                            style: TextStyle(
+                                                color: CustomColor.neutralBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                jamClose = newValue!;
+                                              });
+                                            },
+                                            items: hour
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 15, top: 15),
+                                        padding: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3.3,
+                                        child: Center(
+                                          child: DropdownButton<String>(
+                                            hint: Text(
+                                              "Menit",
+                                              style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  color:
+                                                      CustomColor.neutralBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            underline: SizedBox(),
+                                            value: menitClose,
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color:
+                                                  CustomColor.neutralLightGray,
+                                            ),
+                                            elevation: 16,
+                                            style: TextStyle(
+                                                color: CustomColor.neutralBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                menitClose = newValue!;
+                                              });
+                                            },
+                                            items: minutes
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (!isProsesClose) {
+                                        setState(() {
+                                          isProsesClose = true;
+                                        });
+                                        PintuServices.changeOperasionalClose(
+                                                widget.key_pintu,
+                                                jamClose!,
+                                                menitClose!)
+                                            .then((value) => setState(() {
+                                                  isProsesClose = false;
+                                                }))
+                                            .catchError((err) {
+                                          setState(() {
+                                            isProsesClose = false;
+                                          });
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 14),
+                                      decoration: BoxDecoration(
+                                          color: (jamClose != null &&
+                                                  menitClose != null &&
+                                                  !isProsesClose)
+                                              ? NewCustomColor.primaryBlue
+                                              : Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black
+                                                  .withOpacity(0.25),
+                                              spreadRadius: 0,
+                                              blurRadius: 4,
+                                              offset: Offset(1, 1),
+                                            ),
+                                          ]),
+                                      child: Text(
+                                        !isProsesClose ? "Simpan" : "Proses",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: (jamClose != null &&
+                                                    menitClose != null &&
+                                                    !isProsesClose)
+                                                ? Colors.white
+                                                : NewCustomColor.primaryBlue,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                            underline: SizedBox(),
-                            value: menitOpen,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: CustomColor.neutralLightGray,
-                            ),
-                            elevation: 16,
-                            style: TextStyle(
-                                color: CustomColor.neutralBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                menitOpen = newValue!;
-                              });
-                            },
-                            items: minutes
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      if (!isProsesOpen) {
-                        setState(() {
-                          isProsesOpen = true;
-                        });
-                        PintuServices.changeOperasionalOpen(
-                                ruangan!, jamOpen!, menitOpen!)
-                            .then((value) => setState(() {
-                                  isProsesOpen = false;
-                                }))
-                            .catchError((err) {
-                          setState(() {
-                            isProsesOpen = false;
-                          });
-                        });
-                      }
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                          color: (ruangan != null &&
-                                  jamOpen != null &&
-                                  menitOpen != null && !isProsesOpen)
-                              ? CustomColor.secondaryGreen
-                              : CustomColor.neutralWhite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: CustomColor.neutralGray.withOpacity(0.15),
-                              spreadRadius: 0,
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                            ),
-                          ]),
-                      child: Text(
-                        !isProsesOpen ? "Simpan" : "Proses",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: (ruangan != null &&
-                                    jamOpen != null &&
-                                    menitOpen != null)
-                                ? CustomColor.neutralWhite
-                                : CustomColor.neutralGray,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              margin: EdgeInsets.only(bottom: 20),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: CustomColor.neutralWhite,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: CustomColor.neutralGray.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 10,
-                      offset: Offset(0, 0),
-                    ),
-                  ]),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      "Jadwal Kunci Pintu",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: CustomColor.neutralGray,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 15, top: 15),
-                        padding: EdgeInsets.only(left: 20),
-                        decoration: BoxDecoration(
-                            color: CustomColor.neutralLightGray,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        child: Center(
-                          child: DropdownButton<String>(
-                            hint: Text(
-                              "Jam",
-                              style: TextStyle(
-                                  color: CustomColor.neutralBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            underline: SizedBox(),
-                            value: jamClose,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: CustomColor.neutralLightGray,
-                            ),
-                            elevation: 16,
-                            style: TextStyle(
-                                color: CustomColor.neutralBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                jamClose = newValue!;
-                              });
-                            },
-                            items: hour
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 15, top: 15),
-                        padding: EdgeInsets.only(left: 20),
-                        decoration: BoxDecoration(
-                            color: CustomColor.neutralLightGray,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        child: Center(
-                          child: DropdownButton<String>(
-                            hint: Text(
-                              "Menit",
-                              style: TextStyle(
-                                  color: CustomColor.neutralBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            underline: SizedBox(),
-                            value: menitClose,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: CustomColor.neutralLightGray,
-                            ),
-                            elevation: 16,
-                            style: TextStyle(
-                                color: CustomColor.neutralBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                menitClose = newValue!;
-                              });
-                            },
-                            items: minutes
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      if (!isProsesClose) {
-                        setState(() {
-                          isProsesClose = true;
-                        });
-                        PintuServices.changeOperasionalClose(
-                                ruangan!, jamClose!, menitClose!)
-                            .then((value) => setState(() {
-                                  isProsesClose = false;
-                                }))
-                            .catchError((err) {
-                          setState(() {
-                            isProsesClose = false;
-                          });
-                        });
-                      }
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                          color: (ruangan != null &&
-                                  jamClose != null &&
-                                  menitClose != null &&
-                                  !isProsesClose)
-                              ? CustomColor.secondaryGreen
-                              : CustomColor.neutralWhite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: CustomColor.neutralGray.withOpacity(0.15),
-                              spreadRadius: 0,
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                            ),
-                          ]),
-                      child: Text(
-                        !isProsesClose ? "Simpan" : "Proses",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: (ruangan != null &&
-                                    jamClose != null &&
-                                    menitClose != null)
-                                ? CustomColor.neutralWhite
-                                : CustomColor.neutralGray,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

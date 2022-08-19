@@ -4,6 +4,7 @@ import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/screens/login.dart';
+import 'package:sisdoor/ui/screens/schedule.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -174,15 +175,99 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Container(
                                   width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height / 8,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Icon(e.child('kunci').value.toString() == '0'
-                                          ? Icons.lock_outlined
-                                          : Icons.lock_open_outlined)
+                                      Icon(
+                                        e.child('kunci').value.toString() == '0'
+                                            ? Icons.lock_outlined
+                                            : Icons.lock_open_outlined,
+                                        size: 33,
+                                        color:
+                                            e.child('kunci').value.toString() ==
+                                                    '0'
+                                                ? NewCustomColor
+                                                    .firstGradientGreenColor
+                                                : NewCustomColor.firstRed,
+                                      ),
+                                      Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            e
+                                                        .child('mSwitch')
+                                                        .value
+                                                        .toString() ==
+                                                    '0'
+                                                ? Text(
+                                                    'Pintu Terbuka',
+                                                    style: TextStyle(
+                                                        color: NewCustomColor
+                                                            .firstGradientGreenColor,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  )
+                                                : Text(
+                                                    'Pintu Tertutup',
+                                                    style: TextStyle(
+                                                        color: NewCustomColor
+                                                            .firstRed,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Schedule(
+                                                              key_pintu: e.key
+                                                                  .toString(),
+                                                            )));
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    4, 3, 4, 2),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                    color: NewCustomColor
+                                                        .jamOperasionalButton,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Colors.black
+                                                              .withOpacity(
+                                                                  0.25),
+                                                          offset: Offset(1, 1),
+                                                          blurRadius: 3,
+                                                          spreadRadius: 0)
+                                                    ]),
+                                                child: Text(
+                                                  "Jam Operasional",
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: NewCustomColor
+                                                          .jamOperasionalText),
+                                                ),
+                                              ),
+                                            )
+                                          ])
                                     ],
                                   ),
                                 )

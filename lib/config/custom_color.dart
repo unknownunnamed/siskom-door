@@ -22,8 +22,13 @@ class NewCustomColor {
   static final Color secondgray = Color(0xff838383);
   static final Color thirdgray = Color(0xffD2D2D2);  
   static final Color bgCard = Color(0xffEFEFEF);
+  static final Color textInputSelectCard = Color(0xff505050);
   static final Color firstGreenCard = Color(0xff94D0AD);
   static final Color secondGreenCard = Color(0xffC7E2D2);
   static final Color shadowCard = Color(0xffBDBDBD);
-
+  static final Color firstRed = Color(0xffE52F2F);
+  static final Color jamOperasionalText = Color(0xff5A5A5A);
+  static final Color jamOperasionalButton = Color(0xffE3E3E3);
+  static final Color primaryBlue = Color(0xff48A2F5);
+  
 }
