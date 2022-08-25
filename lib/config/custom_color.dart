@@ -32,6 +32,10 @@ class NewCustomColor {
   static final Color secondRed = Color(0xffFF5C5C);
   static final Color jamOperasionalText = Color(0xff5A5A5A);
   static final Color jamOperasionalButton = Color(0xffE3E3E3);
+  static final Color firstGradientBlueColor = Color(0xff607FBA);
+  static final Color secondGradientBlueColor = Color(0xff66DCD5);
   static final Color primaryBlue = Color(0xff48A2F5);
   static final Color secondBlue = Color(0xff0066FF);
+  static final Color thirdBlue = Color(0xff5587B4);
+  static final Color bgBlueCard = Color(0xff6194C2);
 }

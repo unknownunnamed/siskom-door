@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           e.child('kunci').value.toString() ==
-                                                  '0'
+                                                  '1'
                                               ? Icons.lock_outlined
                                               : Icons.lock_open_outlined,
                                           size: 33,
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                                       .child('kunci')
                                                       .value
                                                       .toString() ==
-                                                  '0'
+                                                  '1'
                                               ? NewCustomColor
                                                   .firstGradientGreenColor
                                               : NewCustomColor.firstRed,
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('mSwitch')
                                                         .value
                                                         .toString() ==
-                                                    '0'
+                                                    '1'
                                                 ? Text(
                                                     'Pintu Terbuka',
                                                     style: TextStyle(
@@ -267,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                                                     style: TextStyle(
                                                         color: NewCustomColor
                                                             .firstRed,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w700),
                                                   ),
