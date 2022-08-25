@@ -58,7 +58,7 @@ class _DoorState extends State<Door> {
                         color: Colors.white.withOpacity(0.15)),
                   )),
               Positioned(
-                  bottom: (MediaQuery.of(context).size.width / 3) / 4,
+                  bottom: -(MediaQuery.of(context).size.width / 3) / 4,
                   right: -(MediaQuery.of(context).size.width / 3) / 2.5,
                   child: Container(
                     height: MediaQuery.of(context).size.width / 3,

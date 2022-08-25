@@ -4,7 +4,7 @@ import 'package:sisdoor/config/custom_color.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final TextInputType? inputType; 
+  final TextInputType? inputType;
   const CustomTextField(
       {Key? key, required this.controller, required this.label, this.inputType})
       : super(key: key);
@@ -21,20 +21,18 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         keyboardType: inputType ?? TextInputType.text,
         style: TextStyle(
-          fontFamily: 'Inter',
+            fontFamily: 'Inter',
             color: NewCustomColor.primarygray,
             fontSize: 15,
             fontWeight: FontWeight.w600),
         decoration: InputDecoration(
-          hintText: label,
-          
-          hintStyle: TextStyle(
-          fontFamily: 'Inter',
-              color: NewCustomColor.primarygray,
-              fontSize: 15,
-              fontWeight: FontWeight.w600),
-              border: InputBorder.none
-        ),
+            hintText: label,
+            hintStyle: TextStyle(
+                fontFamily: 'Inter',
+                color: NewCustomColor.primarygray,
+                fontSize: 15,
+                fontWeight: FontWeight.w600),
+            border: InputBorder.none),
       ),
     );
   }
