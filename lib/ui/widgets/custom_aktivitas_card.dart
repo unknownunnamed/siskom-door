@@ -42,7 +42,7 @@ class _CustomAktivitasCardState extends State<CustomAktivitasCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20, left: 30, right: 30),
+      margin: EdgeInsets.only(bottom: 20),
       width: MediaQuery.of(context).size.width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(

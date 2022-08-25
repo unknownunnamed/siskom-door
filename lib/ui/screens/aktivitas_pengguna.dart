@@ -117,7 +117,7 @@ class _AktivitasPenggunaState extends State<AktivitasPengguna> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 105 - 85,
               child: ListView(
-                padding: EdgeInsets.fromLTRB(30, 10, 26, 10),
+                padding: EdgeInsets.fromLTRB(30, 30, 26, 30),
                 children: data
                     .map((e) => CustomAktivitasCard(
                           datetime: DateFormat('d MMM yyyy \nHH:mm').format(
