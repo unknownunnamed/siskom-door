@@ -20,18 +20,19 @@ AlertDialog customTambahPintulModal(context) {
               Navigator.pop(context);
             },
             child: Container(
-                padding: EdgeInsets.symmetric( vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 15),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: CustomColor.secondaryGreen,
-                    borderRadius: BorderRadius.all(Radius.circular(100))),
+                    color: NewCustomColor.bgGreenButton,
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Text(
                   "Tambah",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: CustomColor.neutralWhite,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Inter',
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
                 )),
           )

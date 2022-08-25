@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/screens/edit_pengguna.dart';
+import 'package:sisdoor/ui/widgets/custom_confirm_modal.dart';
 
 class CustomPenggunaCard extends StatelessWidget {
   final DataSnapshot dataUser;
@@ -116,12 +117,24 @@ class CustomPenggunaCard extends StatelessWidget {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: () async {
-                        UserServices.deleteUser(
-                            dataUser.key.toString(),
-                            dataUser.child('email').value.toString(),
-                            dataUser.child('password').value.toString(),
-                            dataUser.child('idkartu').value.toString());
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                customConfirmModal(context, (() async {
+                                  UserServices.deleteUser(
+                                      dataUser.key.toString(),
+                                      dataUser.child('email').value.toString(),
+                                      dataUser
+                                          .child('password')
+                                          .value
+                                          .toString(),
+                                      dataUser
+                                          .child('idkartu')
+                                          .value
+                                          .toString());
+                                  Navigator.pop(context);
+                                })));
                       },
                       child: Container(
                         width: 37,

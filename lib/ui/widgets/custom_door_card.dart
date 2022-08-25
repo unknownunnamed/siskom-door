@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
+import 'package:sisdoor/ui/widgets/custom_confirm_modal.dart';
 
 class CustomDoorCard extends StatelessWidget {
   final DataSnapshot dataPintu;
@@ -73,8 +74,15 @@ class CustomDoorCard extends StatelessWidget {
                           fontWeight: FontWeight.w600)),
                 ),
                 GestureDetector(
-                  onTap: () async {
-                    PintuServices.deletePintu(dataPintu.key.toString());
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            customConfirmModal(context, () async {
+                              PintuServices.deletePintu(
+                                  dataPintu.key.toString());
+                              Navigator.pop(context);
+                            }));
                   },
                   child: Container(
                     width: 37,

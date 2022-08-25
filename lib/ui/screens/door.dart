@@ -114,7 +114,8 @@ class _DoorState extends State<Door> {
                         BorderRadius.only(topLeft: Radius.circular(60))),
                 padding: EdgeInsets.only(top: 41),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 105 - 85,
+                height: MediaQuery.of(context).size.height - 105 - 85-
+                          MediaQuery.of(context).viewInsets.bottom,
                 child: Stack(
                   children: [
                     ListView(

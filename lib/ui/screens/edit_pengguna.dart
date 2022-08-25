@@ -142,7 +142,9 @@ class _EditPenggunaState extends State<EditPengguna> {
                             BorderRadius.only(topLeft: Radius.circular(60))),
                     padding: EdgeInsets.symmetric(vertical: 29),
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height - 105,
+                    height: MediaQuery.of(context).size.height -
+                        105 -
+                        MediaQuery.of(context).viewInsets.bottom,
                     child: ListView(
                       padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                       children: [
