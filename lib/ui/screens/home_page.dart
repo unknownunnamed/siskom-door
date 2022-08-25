@@ -177,7 +177,8 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   width: MediaQuery.of(context).size.width,
                                   height:
-                                      MediaQuery.of(context).size.height / 8,
+                                      MediaQuery.of(context).size.width / 3 -
+                                          50,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,

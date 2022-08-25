@@ -85,7 +85,7 @@ class _ScheduleState extends State<Schedule> {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.only(left: 13, right: 13, top: 51),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
                         onTap: () {
@@ -107,6 +107,7 @@ class _ScheduleState extends State<Schedule> {
                           )),
                         ),
                       ),
+                      Spacer(),
                       Text(
                         'ATUR JADWAL OPERASIONAL',
                         style: TextStyle(
@@ -115,14 +116,7 @@ class _ScheduleState extends State<Schedule> {
                             fontWeight: FontWeight.w600,
                             fontSize: 19),
                       ),
-                      Container(
-                        height: 28,
-                        width: 28,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.transparent,
-                        ),
-                      )
+                      Spacer(),
                     ],
                   ),
                 )

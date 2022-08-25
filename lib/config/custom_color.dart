@@ -17,18 +17,21 @@ class NewCustomColor {
   static final Color primaryGreen = Color(0xff43A376);
   static final Color secondGreen = Color(0xff71BA866);
   static final Color thirdGreen = Color(0xff36CE89);
+  static final Color textGreenCard = Color(0xff37BB4C);
+  static final Color bgGreenButton = Color(0xff50CF65);
   static final Color bgGreen = Color(0xffFBFDFF);
   static final Color primarygray = Color(0xff31364C);
   static final Color secondgray = Color(0xff838383);
-  static final Color thirdgray = Color(0xffD2D2D2);  
+  static final Color thirdgray = Color(0xffD2D2D2);
   static final Color bgCard = Color(0xffEFEFEF);
   static final Color textInputSelectCard = Color(0xff505050);
   static final Color firstGreenCard = Color(0xff94D0AD);
   static final Color secondGreenCard = Color(0xffC7E2D2);
   static final Color shadowCard = Color(0xffBDBDBD);
   static final Color firstRed = Color(0xffE52F2F);
+  static final Color secondRed = Color(0xffFF5C5C);
   static final Color jamOperasionalText = Color(0xff5A5A5A);
   static final Color jamOperasionalButton = Color(0xffE3E3E3);
   static final Color primaryBlue = Color(0xff48A2F5);
-  
+  static final Color secondBlue = Color(0xff0066FF);
 }

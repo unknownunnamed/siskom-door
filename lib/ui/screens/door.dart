@@ -118,13 +118,14 @@ class _DoorState extends State<Door> {
                 child: Stack(
                   children: [
                     ListView(
-                      padding: EdgeInsets.only(top: 10, bottom: 70),
+                      padding: EdgeInsets.only(top: 10, bottom: 60),
                       children: dataPintu
                           .map((e) => CustomDoorCard(dataPintu: e))
                           .toList(),
                     ),
                     Positioned(
                       bottom: 10,
+                      right: 0,
                       child: GestureDetector(
                         onTap: () {
                           showDialog(
@@ -133,21 +134,24 @@ class _DoorState extends State<Door> {
                                   customTambahPintulModal(context));
                         },
                         child: Container(
-                            width: MediaQuery.of(context).size.width - 60,
+                            width: 56,
+                            height: 56,
                             margin: EdgeInsets.symmetric(horizontal: 30),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
                             decoration: BoxDecoration(
                                 color: CustomColor.secondaryGreen,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100))),
-                            child: Text(
-                              "Tambah Ruangan",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: CustomColor.neutralWhite,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.25),
+                                      offset: Offset(2, 2),
+                                      blurRadius: 4,
+                                      spreadRadius: 0)
+                                ]),
+                            child: Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 40,
+                                color: Colors.white,
                               ),
                             )),
                       ),

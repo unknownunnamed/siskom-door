@@ -42,63 +42,97 @@ class _CustomAktivitasCardState extends State<CustomAktivitasCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      margin: EdgeInsets.only(bottom: 10, left: 30, right: 30),
+      margin: EdgeInsets.only(bottom: 20, left: 30, right: 30),
       width: MediaQuery.of(context).size.width,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-          color: CustomColor.neutralWhite,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: CustomColor.neutralGray.withOpacity(0.15),
-              spreadRadius: 0,
-              blurRadius: 10,
-              offset: Offset(0, 0),
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        color: NewCustomColor.bgCard,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      child: Stack(
         children: [
-          Text(widget.datetime,
-              style: TextStyle(
-                  color: CustomColor.neutralBlack,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400)),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2.5,
-                child: Text(nama ?? 'Anonym',
-                    textAlign: TextAlign.end,
-                    overflow: TextOverflow.ellipsis,
+          Positioned(
+              bottom: -(MediaQuery.of(context).size.width / 2.86) / 2.7,
+              left: -(MediaQuery.of(context).size.width / 2.86) / 4,
+              child: Container(
+                height: MediaQuery.of(context).size.width / 2.86,
+                width: MediaQuery.of(context).size.width / 2.86,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.firstGreenCard),
+              )),
+          Positioned(
+              bottom: -(MediaQuery.of(context).size.width / 5.14) / 2.3,
+              left: (MediaQuery.of(context).size.width / 9),
+              child: Container(
+                height: MediaQuery.of(context).size.width / 5.14,
+                width: MediaQuery.of(context).size.width / 5.14,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.secondGreenCard),
+              )),
+          Positioned(
+              top: -(MediaQuery.of(context).size.width / 4) / 3,
+              right: -(MediaQuery.of(context).size.width / 4) / 4,
+              child: Container(
+                height: MediaQuery.of(context).size.width / 4,
+                width: MediaQuery.of(context).size.width / 4,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.secondGreenCard),
+              )),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(widget.datetime,
                     style: TextStyle(
-                        color: CustomColor.neutralBlack,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400)),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(widget.ruangan,
-                  style: TextStyle(
-                      color: CustomColor.neutralGray,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400)),
-              SizedBox(
-                height: 5,
-              ),
-              Text(widget.isLock ? 'Terkunci' : 'Terbuka',
-                  style: TextStyle(
-                      color: widget.isLock
-                          ? CustomColor.primaryRose
-                          : CustomColor.secondaryGreen,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400)),
-            ],
-          )
+                        fontFamily: 'Inter',
+                        color: NewCustomColor.primarygray,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600)),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: Text(nama ?? 'Anonym',
+                          textAlign: TextAlign.end,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: NewCustomColor.primarygray,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(widget.ruangan,
+                        style: TextStyle(
+                            fontFamily: 'Inter',
+                            color: NewCustomColor.primarygray,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600)),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(widget.isLock ? 'Terkunci' : 'Terbuka',
+                        style: TextStyle(
+                            fontFamily: 'Inter',
+                            color: widget.isLock
+                                ? NewCustomColor.firstRed
+                                : NewCustomColor.textGreenCard,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600)),
+                  ],
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

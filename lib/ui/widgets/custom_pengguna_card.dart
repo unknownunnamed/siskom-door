@@ -12,105 +12,137 @@ class CustomPenggunaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      margin: EdgeInsets.only(bottom: 10, left: 30, right: 30),
+      margin: EdgeInsets.only(bottom: 19, left: 30, right: 30),
       width: MediaQuery.of(context).size.width,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-          color: CustomColor.neutralWhite,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: CustomColor.neutralGray.withOpacity(0.15),
-              spreadRadius: 0,
-              blurRadius: 10,
-              offset: Offset(0, 0),
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        color: CustomColor.neutralWhite,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      child: Stack(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2,
-                child: Text(dataUser.child('nama').value.toString(),
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: CustomColor.neutralBlack,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400)),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2,
-                child: Text(dataUser.child('email').value.toString(),
-                    style: TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        color: CustomColor.neutralGray,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400)),
-              ),
-            ],
+          Positioned(
+              bottom: -(MediaQuery.of(context).size.width / 2.86) / 2.7,
+              left: -(MediaQuery.of(context).size.width / 2.86) / 4,
+              child: Container(
+                height: MediaQuery.of(context).size.width / 2.86,
+                width: MediaQuery.of(context).size.width / 2.86,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.firstGreenCard),
+              )),
+          Positioned(
+              bottom: -(MediaQuery.of(context).size.width / 5.14) / 2.3,
+              left: (MediaQuery.of(context).size.width / 9),
+              child: Container(
+                height: MediaQuery.of(context).size.width / 5.14,
+                width: MediaQuery.of(context).size.width / 5.14,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.secondGreenCard),
+              )),
+          Positioned(
+              top: -(MediaQuery.of(context).size.width / 4) / 3,
+              right: -(MediaQuery.of(context).size.width / 4) / 4,
+              child: Container(
+                height: MediaQuery.of(context).size.width / 4,
+                width: MediaQuery.of(context).size.width / 4,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: NewCustomColor.secondGreenCard),
+              )),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: Text(dataUser.child('nama').value.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: NewCustomColor.primarygray,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: Text(dataUser.child('email').value.toString(),
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: NewCustomColor.primarygray,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditPengguna(
+                                      dataUser: dataUser,
+                                    )));
+                      },
+                      child: Container(
+                        width: 37,
+                        height: 37,
+                        decoration: BoxDecoration(
+                            color: NewCustomColor.secondBlue,
+                            shape: BoxShape.circle),
+                        child: Center(
+                          child: Icon(
+                            Icons.edit,
+                            size: 22,
+                            color: CustomColor.neutralWhite,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        UserServices.deleteUser(
+                            dataUser.key.toString(),
+                            dataUser.child('email').value.toString(),
+                            dataUser.child('password').value.toString(),
+                            dataUser.child('idkartu').value.toString());
+                      },
+                      child: Container(
+                        width: 37,
+                        height: 37,
+                        decoration: BoxDecoration(
+                            color: NewCustomColor.secondRed,
+                            shape: BoxShape.circle),
+                        child: Center(
+                          child: Icon(
+                            Icons.delete,
+                            size: 22,
+                            color: CustomColor.neutralWhite,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditPengguna(
-                                dataUser: dataUser,
-                              )));
-                },
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: CustomColor.secondaryTorea,
-                      shape: BoxShape.circle),
-                  child: Center(
-                    child: Icon(
-                      Icons.edit,
-                      size: 15,
-                      color: CustomColor.neutralWhite,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  UserServices.deleteUser(
-                      dataUser.key.toString(),
-                      dataUser.child('email').value.toString(),
-                      dataUser.child('password').value.toString(),
-                      dataUser.child('idkartu').value.toString());
-                },
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: CustomColor.primaryRose, shape: BoxShape.circle),
-                  child: Center(
-                    child: Icon(
-                      Icons.delete,
-                      size: 15,
-                      color: CustomColor.neutralWhite,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );
