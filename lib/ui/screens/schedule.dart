@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
+import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 
 class Schedule extends StatefulWidget {
   final String key_pintu;
@@ -363,6 +364,11 @@ class _ScheduleState extends State<Schedule> {
                                             .then((value) => setState(() {
                                                   isProsesOpen = false;
                                                 }))
+                                            .then((value) => showDialog(
+                                                context: context,
+                                                builder: ((context) =>
+                                                    customSuccessModal(context,
+                                                        'Jadwal operasional berhasil disimpan'))))
                                             .catchError((err) {
                                           setState(() {
                                             isProsesOpen = false;
@@ -609,6 +615,11 @@ class _ScheduleState extends State<Schedule> {
                                             .then((value) => setState(() {
                                                   isProsesClose = false;
                                                 }))
+                                            .then((value) => showDialog(
+                                                context: context,
+                                                builder: ((context) =>
+                                                    customSuccessModal(context,
+                                                        'Jadwal operasional berhasil disimpan'))))
                                             .catchError((err) {
                                           setState(() {
                                             isProsesClose = false;

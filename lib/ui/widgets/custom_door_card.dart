@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/widgets/custom_confirm_modal.dart';
+import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 
 class CustomDoorCard extends StatelessWidget {
   final DataSnapshot dataPintu;
@@ -82,6 +83,10 @@ class CustomDoorCard extends StatelessWidget {
                               PintuServices.deletePintu(
                                   dataPintu.key.toString());
                               Navigator.pop(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => customSuccessModal(
+                                      context, 'Ruangan berhasil di delete'));
                             }));
                   },
                   child: Container(

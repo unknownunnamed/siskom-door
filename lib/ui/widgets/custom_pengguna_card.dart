@@ -4,6 +4,7 @@ import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/screens/edit_pengguna.dart';
 import 'package:sisdoor/ui/widgets/custom_confirm_modal.dart';
+import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 
 class CustomPenggunaCard extends StatelessWidget {
   final DataSnapshot dataUser;
@@ -134,6 +135,10 @@ class CustomPenggunaCard extends StatelessWidget {
                                           .value
                                           .toString());
                                   Navigator.pop(context);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => customSuccessModal(
+                                          context, 'Data berhasil di delete'));
                                 })));
                       },
                       child: Container(

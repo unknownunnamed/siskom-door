@@ -4,6 +4,7 @@ import 'package:sisdoor/services/rfid_services.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 import 'package:sisdoor/ui/widgets/custom_password_form.dart';
+import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
 
 class TambahPengguna extends StatefulWidget {
@@ -128,7 +129,9 @@ class _TambahPenggunaState extends State<TambahPengguna> {
                               BorderRadius.only(topLeft: Radius.circular(60))),
                       padding: EdgeInsets.symmetric(vertical: 29),
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height - 105 -  MediaQuery.of(context).viewInsets.bottom,
+                      height: MediaQuery.of(context).size.height -
+                          105 -
+                          MediaQuery.of(context).viewInsets.bottom,
                       child: ListView(
                         padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                         children: [
@@ -314,7 +317,7 @@ class _TambahPenggunaState extends State<TambahPengguna> {
                                                     noHPController.text,
                                                     namaController.text)
                                                 .then((value) =>
-                                                    Navigator.pop(context));
+                                                    Navigator.pop(context)).then((value) => showDialog(context: context, builder: (context) => customSuccessModal(context, 'Data berhasil ditambah')));
                                           }
                                         },
                                         child: Container(

@@ -4,6 +4,7 @@ import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/rfid_services.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/widgets/custom_appbar.dart';
+import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
 
 class EditPengguna extends StatefulWidget {
@@ -311,6 +312,11 @@ class _EditPenggunaState extends State<EditPengguna> {
                                               namaController.text,
                                               widget.dataUser.key.toString());
                                           Navigator.pop(context);
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  customSuccessModal(context,
+                                                      'Data berhasil di edit'));
                                         },
                                         child: Container(
                                             margin: EdgeInsets.only(bottom: 18),
