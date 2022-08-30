@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/log_services.dart';
-import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 import 'package:sisdoor/ui/widgets/custom_aktivitas_card.dart';
 
 class AktivitasPengguna extends StatefulWidget {

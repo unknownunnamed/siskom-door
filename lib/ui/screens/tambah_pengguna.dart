@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/rfid_services.dart';
 import 'package:sisdoor/services/user_services.dart';
-import 'package:sisdoor/ui/widgets/custom_appbar.dart';
 import 'package:sisdoor/ui/widgets/custom_password_form.dart';
 import 'package:sisdoor/ui/widgets/custom_success_modal.dart';
 import 'package:sisdoor/ui/widgets/custom_text_form.dart';
@@ -317,7 +316,13 @@ class _TambahPenggunaState extends State<TambahPengguna> {
                                                     noHPController.text,
                                                     namaController.text)
                                                 .then((value) =>
-                                                    Navigator.pop(context)).then((value) => showDialog(context: context, builder: (context) => customSuccessModal(context, 'Data berhasil ditambah')));
+                                                    Navigator.pop(context))
+                                                .then((value) => showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        customSuccessModal(
+                                                            context,
+                                                            'Data berhasil ditambah')));
                                           }
                                         },
                                         child: Container(

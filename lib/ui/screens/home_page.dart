@@ -229,8 +229,8 @@ class _HomePageState extends State<HomePage> {
                                         child: Icon(
                                           e.child('kunci').value.toString() ==
                                                   '1'
-                                              ? Icons.lock_outlined
-                                              : Icons.lock_open_outlined,
+                                              ? Icons.lock_open_outlined
+                                              : Icons.lock_outlined,
                                           size: 33,
                                           color: e
                                                       .child('kunci')

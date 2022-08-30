@@ -62,14 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image(
                 image: AssetImage("assets/images/logo.png"),
-                width: MediaQuery.of(context).size.width / 2,
+                width: MediaQuery.of(context).size.width,
               ),
-              // Text(
-              //   "TRACKING\nKOTAK AMAL",
-              //   textAlign: TextAlign.center,
-              //   style: CustomTextStyle.welcomeText
-              //       .copyWith(color: PrimaryColors.primaryGreen),
-              // )
             ],
           ),
         ),

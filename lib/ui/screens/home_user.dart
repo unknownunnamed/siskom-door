@@ -5,7 +5,6 @@ import 'package:sisdoor/services/firebase_auth.dart';
 import 'package:sisdoor/services/pintu_services.dart';
 import 'package:sisdoor/ui/screens/login.dart';
 import 'package:sisdoor/ui/widgets/custom_jam_operasional_modal.dart';
-import 'package:sisdoor/ui/widgets/custom_user_card.dart';
 
 class HomeUser extends StatefulWidget {
   const HomeUser({Key? key}) : super(key: key);
