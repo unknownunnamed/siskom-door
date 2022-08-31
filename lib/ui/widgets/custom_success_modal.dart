@@ -18,7 +18,7 @@ AlertDialog customSuccessModal(context, String text) {
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Text(
-                "Success",
+                "Berhasil",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Inter',

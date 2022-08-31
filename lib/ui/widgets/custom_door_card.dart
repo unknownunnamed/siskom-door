@@ -86,7 +86,7 @@ class CustomDoorCard extends StatelessWidget {
                               showDialog(
                                   context: context,
                                   builder: (context) => customSuccessModal(
-                                      context, 'Ruangan berhasil di delete'));
+                                      context, 'Ruangan berhasil di hapus'));
                             }));
                   },
                   child: Container(

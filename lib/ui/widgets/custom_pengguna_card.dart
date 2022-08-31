@@ -150,7 +150,7 @@ class CustomPenggunaCard extends StatelessWidget {
                                   showDialog(
                                       context: context,
                                       builder: (context) => customSuccessModal(
-                                          context, 'Data berhasil di delete'));
+                                          context, 'Data berhasil di hapus'));
                                 })));
                       },
                       child: Container(
