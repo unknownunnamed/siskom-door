@@ -32,9 +32,9 @@ class UserServices {
       String nama, String uid) async {
     try {
       if (rfidnew == rfidold) {
-        await ref.child(uid).update({"phone": phone, "nama": nama});
+        await ref.child(uid).update({"noHP": phone, "nama": nama});
       } else {
-        await ref.child(uid).update({"phone": phone, "nama": nama, 'idkartu': rfidnew});
+        await ref.child(uid).update({"noHP": phone, "nama": nama, 'idkartu': rfidnew});
         await RFIDServices.changeStatus(rfidold, 0);
         await RFIDServices.changeStatus(rfidnew, 1);
       }
