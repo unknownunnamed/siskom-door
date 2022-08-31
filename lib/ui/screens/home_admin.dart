@@ -22,57 +22,29 @@ class _HomeAdminState extends State<HomeAdmin> {
         'home_active.png',
         "Beranda",
         HomePage()
-        // () {
-        //   Navigator.push(
-        //       context, MaterialPageRoute(builder: (context) => Schedule()));
-        // }
       ],
       [
         'jadwal.png',
         'jadwal_active.png',
         "Aktivitas Pengguna",
         AktivitasPengguna()
-        // () {
-        //   Navigator.push(context,
-        //       MaterialPageRoute(builder: (context) => AktivitasPengguna()));
-        // }
       ],
       [
         'pengguna.png',
         'pengguna_active.png',
         "Data Pengguna",
         Pengguna()
-        // () {
-        //   Navigator.push(
-        //       context, MaterialPageRoute(builder: (context) => Pengguna()));
-        // }
       ],
       [
         'pintu.png',
         'pintu_active.png',
         "Data Ruangan",
         Door()
-        // () {
-        //   Navigator.push(
-        //       context, MaterialPageRoute(builder: (context) => Door()));
-        // }
       ],
-      // [
-      //   Icons.logout,
-      //   "Logout",
-      //   () async {
-      //     await AuthFirebase.signOut();
-      //     Navigator.pushAndRemoveUntil(
-      //         context,
-      //         MaterialPageRoute(builder: (context) => Login()),
-      //         (route) => false);
-      //   }
-      // ]
     ];
 
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      backgroundColor: CustomColor.neutralWhite,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           menu[index][3],

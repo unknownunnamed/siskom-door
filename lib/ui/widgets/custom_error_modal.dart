@@ -17,10 +17,10 @@ AlertDialog customErrorModal(context, String text) {
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Text(
-                "Error !",
+                "Akses Ditolak",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: CustomColor.primaryRose,
+                    color: NewCustomColor.firstRed,
                     fontSize: 20,
                     fontWeight: FontWeight.w600),
               ),
@@ -37,7 +37,7 @@ AlertDialog customErrorModal(context, String text) {
                 text,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: CustomColor.neutralBlack,
+                    color: NewCustomColor.primarygray,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
               ),
@@ -49,17 +49,16 @@ AlertDialog customErrorModal(context, String text) {
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-                // margin: EdgeInsets.only(top: 20),
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 decoration: BoxDecoration(
-                    color: CustomColor.primaryRose,
+                    color: NewCustomColor.firstRed,
                     borderRadius: BorderRadius.all(Radius.circular(100))),
                 child: Text(
                   "Oke",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: CustomColor.neutralWhite,
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),

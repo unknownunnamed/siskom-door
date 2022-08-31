@@ -62,7 +62,7 @@ AlertDialog customSuccessModal(context, String text) {
                   "Oke",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: CustomColor.neutralWhite,
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),

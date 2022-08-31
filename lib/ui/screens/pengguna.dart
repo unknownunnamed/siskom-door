@@ -140,7 +140,7 @@ class _PenggunaState extends State<Pengguna> {
                             height: 56,
                             margin: EdgeInsets.symmetric(horizontal: 30),
                            decoration: BoxDecoration(
-                                color: CustomColor.secondaryGreen,
+                                color: NewCustomColor.bgGreenButton,
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(

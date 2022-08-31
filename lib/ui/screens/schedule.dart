@@ -267,7 +267,7 @@ class _ScheduleState extends State<Schedule> {
                                               style: TextStyle(
                                                   fontFamily: 'Inter',
                                                   color:
-                                                      CustomColor.neutralBlack,
+                                                      NewCustomColor.primarygray,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -276,11 +276,11 @@ class _ScheduleState extends State<Schedule> {
                                             icon: Icon(
                                               Icons.arrow_drop_down,
                                               color:
-                                                  CustomColor.neutralLightGray,
+                                                  Colors.white,
                                             ),
                                             elevation: 16,
                                             style: TextStyle(
-                                                color: CustomColor.neutralBlack,
+                                                color: NewCustomColor.primarygray,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                             onChanged: (String? newValue) {
@@ -317,7 +317,7 @@ class _ScheduleState extends State<Schedule> {
                                               style: TextStyle(
                                                   fontFamily: 'Inter',
                                                   color:
-                                                      CustomColor.neutralBlack,
+                                                      NewCustomColor.primarygray,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -326,11 +326,11 @@ class _ScheduleState extends State<Schedule> {
                                             icon: Icon(
                                               Icons.arrow_drop_down,
                                               color:
-                                                  CustomColor.neutralLightGray,
+                                                  Colors.white,
                                             ),
                                             elevation: 16,
                                             style: TextStyle(
-                                                color: CustomColor.neutralBlack,
+                                                color: NewCustomColor.primarygray,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                             onChanged: (String? newValue) {
@@ -518,7 +518,7 @@ class _ScheduleState extends State<Schedule> {
                                               style: TextStyle(
                                                   fontFamily: 'Inter',
                                                   color:
-                                                      CustomColor.neutralBlack,
+                                                      NewCustomColor.primarygray,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -527,11 +527,11 @@ class _ScheduleState extends State<Schedule> {
                                             icon: Icon(
                                               Icons.arrow_drop_down,
                                               color:
-                                                  CustomColor.neutralLightGray,
+                                                  Colors.white,
                                             ),
                                             elevation: 16,
                                             style: TextStyle(
-                                                color: CustomColor.neutralBlack,
+                                                color: NewCustomColor.primarygray,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                             onChanged: (String? newValue) {
@@ -568,7 +568,7 @@ class _ScheduleState extends State<Schedule> {
                                               style: TextStyle(
                                                   fontFamily: 'Inter',
                                                   color:
-                                                      CustomColor.neutralBlack,
+                                                      NewCustomColor.primarygray,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -577,11 +577,11 @@ class _ScheduleState extends State<Schedule> {
                                             icon: Icon(
                                               Icons.arrow_drop_down,
                                               color:
-                                                  CustomColor.neutralLightGray,
+                                                  Colors.white,
                                             ),
                                             elevation: 16,
                                             style: TextStyle(
-                                                color: CustomColor.neutralBlack,
+                                                color: NewCustomColor.primarygray,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                             onChanged: (String? newValue) {

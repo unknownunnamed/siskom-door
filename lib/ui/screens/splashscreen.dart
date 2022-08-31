@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sisdoor/config/custom_color.dart';
 import 'package:sisdoor/services/user_services.dart';
 import 'package:sisdoor/ui/screens/home_admin.dart';
 import 'package:sisdoor/ui/screens/home_user.dart';
@@ -51,12 +50,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.neutralWhite,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          color: CustomColor.neutralWhite,
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

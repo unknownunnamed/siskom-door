@@ -33,7 +33,7 @@ class _HomeUserState extends State<HomeUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: CustomColor.neutralLightGray,
+        backgroundColor: Colors.white,
         body: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -192,8 +192,8 @@ class _HomeUserState extends State<HomeUser> {
                                           Icon(
                                             e.child('kunci').value.toString() ==
                                                     '1'
-                                                ? Icons.lock_outlined
-                                                : Icons.lock_open_outlined,
+                                                ? Icons.lock_open_outlined
+                                                : Icons.lock_outlined,
                                             size: 33,
                                             color: e
                                                         .child('kunci')

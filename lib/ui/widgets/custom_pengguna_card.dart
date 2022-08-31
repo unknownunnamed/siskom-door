@@ -18,7 +18,7 @@ class CustomPenggunaCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: CustomColor.neutralWhite,
+        color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Stack(
@@ -85,6 +85,18 @@ class CustomPenggunaCard extends StatelessWidget {
                               fontSize: 15,
                               fontWeight: FontWeight.w600)),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: Text(dataUser.child('noHP').value.toString(),
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: NewCustomColor.primarygray,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600)),
+                    ),
                   ],
                 ),
                 Row(
@@ -109,7 +121,7 @@ class CustomPenggunaCard extends StatelessWidget {
                           child: Icon(
                             Icons.edit,
                             size: 22,
-                            color: CustomColor.neutralWhite,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -151,7 +163,7 @@ class CustomPenggunaCard extends StatelessWidget {
                           child: Icon(
                             Icons.delete,
                             size: 22,
-                            color: CustomColor.neutralWhite,
+                            color: Colors.white,
                           ),
                         ),
                       ),

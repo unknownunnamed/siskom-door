@@ -17,7 +17,7 @@ AlertDialog customJamOperasionalModal(context, open, close) {
                 "Jam Operasional",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: CustomColor.neutralBlack,
+                    color: NewCustomColor.primarygray,
                     fontWeight: FontWeight.w600,
                     fontSize: 24),
               ),
@@ -29,22 +29,22 @@ AlertDialog customJamOperasionalModal(context, open, close) {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-                color: CustomColor.neutralLightGray,
+                color: NewCustomColor.thirdgray,
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   open,
-                  style: TextStyle(color: CustomColor.neutralBlack, fontSize: 18),
+                  style: TextStyle(color: NewCustomColor.primarygray, fontSize: 18),
                 ),
                 Text(
                   '-',
-                  style: TextStyle(color: CustomColor.neutralBlack, fontSize: 18),
+                  style: TextStyle(color: NewCustomColor.primarygray, fontSize: 18),
                 ),
                 Text(
                   close,
-                  style: TextStyle(color: CustomColor.neutralBlack, fontSize: 18),
+                  style: TextStyle(color: NewCustomColor.primarygray, fontSize: 18),
                 )
               ],
             ),

@@ -16,11 +16,11 @@ class CustomDoorCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-          color: CustomColor.neutralWhite,
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
-              color: CustomColor.neutralGray.withOpacity(0.15),
+              color: Colors.black.withOpacity(0.15),
               spreadRadius: 0,
               blurRadius: 10,
               offset: Offset(0, 0),
@@ -99,7 +99,7 @@ class CustomDoorCard extends StatelessWidget {
                       child: Icon(
                         Icons.delete,
                         size: 22,
-                        color: CustomColor.neutralWhite,
+                        color: Colors.white,
                       ),
                     ),
                   ),
